@@ -60,7 +60,7 @@
 .ai-console .node-agent:hover{transform:translateX(-50%) translateY(-2px)}
 .ai-console .node-vlm{right:2%;top:27%}
 .ai-console .node-vlm:after{left:0;top:50%;transform:translate(-50%,-50%)}
-.ai-console .node-output{right:1%;top:53%}
+.ai-console .node-output{right:1%;top:53%;bottom:auto!important}
 .ai-console .node-output .node-icon{color:var(--orange)}
 .ai-console .node-output:after{left:0;top:50%;transform:translate(-50%,-50%);background:var(--orange);box-shadow:0 0 9px #ff895e80}
 .ai-console .node-sql{left:10%;bottom:5%}
