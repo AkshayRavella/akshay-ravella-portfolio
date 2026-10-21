@@ -27,3 +27,4 @@
  .ai-console .ai-readout{justify-content:center}
 }
 @media(prefers-reduced-motion:reduce){.connection-path{animation:none!important}.connection-packet{display:none!important}}
+.ai-console .ai-stage{overflow:hidden}
