@@ -5,3 +5,25 @@
 @media(max-width:950px){.hero-grid{grid-template-columns:minmax(0,1fr) minmax(430px,.9fr)}.ai-console{min-height:410px}}
 @media(max-width:700px){.hero-grid{grid-template-columns:1fr}.hero-title{max-width:none}.ai-console{min-height:350px}.ai-stage{inset:52px 0 45px}.ai-core{width:140px;height:140px}.core-logo{width:70px;height:70px;font-size:21px}.ai-node{width:88px;padding:7px}.ai-node strong{font-size:8px}.ai-node small{font-size:6px}.node-rag{left:3%;top:30%}.node-agent{left:18%;top:5%}.node-vlm{right:3%;top:20%}.node-sql{left:12%;bottom:10%}.node-tools{right:12%;bottom:7%}.node-output{right:1%;bottom:41%}.readout-live{display:none}.ai-readout{gap:7px;font-size:7px}.ai-prompt{left:4%}}
 @media(prefers-reduced-motion:reduce){.ai-console *{animation:none!important}}
+/* Refinement pass: let the AI architecture live in the page, not inside a card. */
+.hero-topline{justify-content:flex-start}
+.ai-console{border:0!important;box-shadow:none!important;overflow:visible;background:radial-gradient(ellipse at 52% 49%,rgba(35,43,23,.42) 0%,rgba(24,28,19,.23) 42%,rgba(17,17,15,0) 76%)!important}
+.ai-console:before{background:none!important;animation:none!important}
+.ai-console:after{display:none!important}
+.ai-console .art-label{padding:18px 6px 8px;border:0!important;background:transparent;color:#878b78}
+.ai-console .ai-status{color:var(--acid)!important}
+.ai-console .ai-stage{overflow:visible}
+.ai-console .ai-grid-lines{background-image:linear-gradient(#c9e76c09 1px,transparent 1px),linear-gradient(90deg,#c9e76c09 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse at center,#000 5%,transparent 75%);transform:perspective(550px) rotateX(54deg) scale(1.35);opacity:.62}
+.ai-connections{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:2;pointer-events:none}
+.connection-path{fill:none;stroke:#b1d75a;stroke-width:.7;stroke-opacity:.64;stroke-dasharray:1.2 1.7;vector-effect:non-scaling-stroke;animation:connector-dash 3.2s linear infinite}
+.connection-path:nth-child(2n){stroke:#a3b46a;stroke-opacity:.52;animation-duration:4s}
+.connection-packet{fill:var(--acid);filter:drop-shadow(0 0 2px #d7fa63)}
+.connection-packet.packet-orange{fill:var(--orange);filter:drop-shadow(0 0 2px #ff895e)}
+.ai-console .ai-readout{border:0!important;background:transparent;padding-bottom:3px}
+@keyframes connector-dash{to{stroke-dashoffset:-12}}
+@media(max-width:700px){
+ .ai-console{background:radial-gradient(ellipse at 50% 50%,rgba(35,43,23,.34) 0%,rgba(17,17,15,0) 77%)!important}
+ .ai-console .art-label{padding-left:2px;padding-right:2px;font-size:8px}
+ .ai-console .ai-readout{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){.connection-path{animation:none!important}.connection-packet{display:none!important}}
