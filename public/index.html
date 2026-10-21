@@ -33,7 +33,7 @@
       <div class="art-label mono"><span>AI SYSTEMS / MULTI-AGENT FLOW</span><span class="ai-status">● INFERENCE ONLINE</span></div>
       <div class="ai-stage">
         <div class="ai-grid-lines"></div>
-        <div class="ai-prompt mono"><span>USER INTENT</span><b>“FIND THE ANSWER.”</b><i></i></div>
+        <!-- Prompt removed to keep the capability labels clear and uncluttered. -->
         <div class="ai-core"><div class="core-halo"></div><div class="core-ring cr1"></div><div class="core-ring cr2"></div><div class="core-ring cr3"></div><div class="core-logo">AI<span>ENGINE</span></div><div class="core-scan"></div></div>
         <div class="ai-node node-rag"><span class="node-icon">⌁</span><strong>RAG</strong><small>RETRIEVE</small></div>
         <div class="ai-node node-agent"><span class="node-icon">✦</span><strong>AGENTS</strong><small>REASON</small></div>
@@ -42,13 +42,18 @@
         <div class="ai-node node-tools"><span class="node-icon">↗</span><strong>TOOLS</strong><small>ACT</small></div>
         <div class="ai-node node-output"><span class="node-icon">✓</span><strong>GROUNDED</strong><small>DELIVER</small></div>
         <svg class="ai-connections" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <path class="connection-path" d="M 23 38 C 31 39, 37 44, 43 48"/><path class="connection-path" d="M 37 19 C 40 27, 43 34, 46 41"/><path class="connection-path" d="M 78 34 C 70 36, 63 40, 56 45"/><path class="connection-path" d="M 33 76 C 36 69, 40 64, 44 60"/><path class="connection-path" d="M 67 76 C 64 69, 60 64, 57 60"/><path class="connection-path" d="M 82 52 C 73 52, 65 52, 58 52"/>
-          <circle class="connection-packet" r="0.65"><animateMotion dur="2.4s" repeatCount="indefinite" path="M 23 38 C 31 39, 37 44, 43 48"/></circle>
-          <circle class="connection-packet packet-orange" r="0.65"><animateMotion dur="2.1s" repeatCount="indefinite" path="M 37 19 C 40 27, 43 34, 46 41"/></circle>
-          <circle class="connection-packet" r="0.65"><animateMotion dur="2.7s" repeatCount="indefinite" path="M 78 34 C 70 36, 63 40, 56 45"/></circle>
-          <circle class="connection-packet packet-orange" r="0.65"><animateMotion dur="2.5s" repeatCount="indefinite" path="M 33 76 C 36 69, 40 64, 44 60"/></circle>
-          <circle class="connection-packet" r="0.65"><animateMotion dur="2.2s" repeatCount="indefinite" path="M 67 76 C 64 69, 60 64, 57 60"/></circle>
-          <circle class="connection-packet" r="0.65"><animateMotion dur="2.8s" repeatCount="indefinite" path="M 82 52 C 73 52, 65 52, 58 52"/></circle>
+          <path id="connection-rag" class="connection-path" data-target="node-rag" d="M 36 47 C 32 46, 29 45, 24 45"/>
+          <path id="connection-agents" class="connection-path" data-target="node-agent" d="M 50 28 C 50 24, 50 22, 50 19"/>
+          <path id="connection-vlm" class="connection-path" data-target="node-vlm" d="M 64 40 C 69 37, 73 35, 79 35"/>
+          <path id="connection-grounded" class="connection-path" data-target="node-output" d="M 64 58 C 69 58, 74 58, 79 58"/>
+          <path id="connection-sql" class="connection-path" data-target="node-sql" d="M 40 70 C 38 74, 35 78, 33 82"/>
+          <path id="connection-tools" class="connection-path" data-target="node-tools" d="M 60 70 C 63 74, 68 78, 73 82"/>
+          <circle class="connection-packet" r="0.65"><animateMotion data-follow="connection-rag" dur="2.4s" repeatCount="indefinite" path="M 36 47 C 32 46, 29 45, 24 45"/></circle>
+          <circle class="connection-packet packet-orange" r="0.65"><animateMotion data-follow="connection-agents" dur="2.1s" repeatCount="indefinite" path="M 50 28 C 50 24, 50 22, 50 19"/></circle>
+          <circle class="connection-packet" r="0.65"><animateMotion data-follow="connection-vlm" dur="2.7s" repeatCount="indefinite" path="M 64 40 C 69 37, 73 35, 79 35"/></circle>
+          <circle class="connection-packet packet-orange" r="0.65"><animateMotion data-follow="connection-grounded" dur="2.5s" repeatCount="indefinite" path="M 64 58 C 69 58, 74 58, 79 58"/></circle>
+          <circle class="connection-packet" r="0.65"><animateMotion data-follow="connection-sql" dur="2.2s" repeatCount="indefinite" path="M 40 70 C 38 74, 35 78, 33 82"/></circle>
+          <circle class="connection-packet" r="0.65"><animateMotion data-follow="connection-tools" dur="2.8s" repeatCount="indefinite" path="M 60 70 C 63 74, 68 78, 73 82"/></circle>
         </svg>
       </div>
       <div class="ai-readout mono"><span>CONTEXT</span><b>→</b><span>REASONING</span><b>→</b><span>TOOL USE</span><b>→</b><span>OUTPUT</span><span class="readout-live">● 04 AGENTS ACTIVE</span></div>
