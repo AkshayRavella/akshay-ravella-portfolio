@@ -226,18 +226,19 @@ img { display: block; max-width: 100% }
 
 /* AI console (hero illustration) */
 .ai-console {
-  position: relative; min-height: 470px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
-  background: var(--v-bg); color: var(--v-ink); border: 1px solid var(--v-border); border-radius: var(--r-lg); box-shadow: var(--v-shadow);
+  position: relative; min-height: 470px; display: flex; flex-direction: column; justify-content: space-between;
+  color: var(--v-ink);
+  /* No card: a soft glow that dissolves into the page */
+  background: radial-gradient(ellipse 60% 55% at 50% 50%, rgb(var(--v-accent-rgb) / .08), transparent 72%);
 }
+.ai-console::before, .ai-console::after { -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 35%, transparent 80%); mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 35%, transparent 80%) }
 .ai-console::before { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgb(var(--v-accent-rgb) / .04) 50%, transparent 70%); background-size: 220% 100%; animation: scan 8s linear infinite }
 .ai-console::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent 49.8%, rgb(var(--v-accent-rgb) / .05) 50%, transparent 50.2%), linear-gradient(0deg, transparent 49.8%, rgb(var(--v-accent-rgb) / .05) 50%, transparent 50.2%) }
-.ai-bar { position: relative; z-index: 4; display: flex; justify-content: space-between; padding: 17px 19px; border-bottom: 1px solid var(--v-line-soft); font: 9px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--v-muted) }
-.ai-bar b { color: var(--v-accent); font-weight: 400 }
-.ai-stage { position: absolute; inset: 54px 0 46px; overflow: hidden }
-.ai-grid { position: absolute; inset: 0; background-image: linear-gradient(rgb(var(--v-accent-rgb) / .05) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--v-accent-rgb) / .05) 1px, transparent 1px); background-size: 31px 31px; -webkit-mask-image: radial-gradient(circle, #000 25%, transparent 83%); mask-image: radial-gradient(circle, #000 25%, transparent 83%); transform: perspective(550px) rotateX(54deg) scale(1.5); transform-origin: center bottom }
-.ai-prompt { position: absolute; left: 6%; top: 6%; z-index: 4; display: flex; flex-direction: column; gap: 5px; font: 8px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--v-muted) }
+.ai-stage { position: absolute; inset: 24px 0 46px }
+.ai-grid { position: absolute; inset: 0; background-image: linear-gradient(rgb(var(--v-accent-rgb) / .05) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--v-accent-rgb) / .05) 1px, transparent 1px); background-size: 31px 31px; -webkit-mask-image: radial-gradient(ellipse 55% 50% at 50% 50%, #000 20%, transparent 70%); mask-image: radial-gradient(ellipse 55% 50% at 50% 50%, #000 20%, transparent 70%); transform: perspective(550px) rotateX(54deg) scale(1.5); transform-origin: center bottom }
+.ai-prompt { position: absolute; right: 6%; top: 4%; z-index: 4; display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 5px; font: 8px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--v-muted) }
 .ai-prompt b { font: 500 12px var(--font-display); letter-spacing: .02em; color: var(--v-ink); text-transform: none }
-.ai-prompt i { height: 1px; width: 68px; background: linear-gradient(90deg, var(--v-accent), transparent); animation: pulse-line 2s ease-in-out infinite }
+.ai-prompt i { height: 1px; width: 68px; background: linear-gradient(270deg, var(--v-accent), transparent); animation: pulse-line 2s ease-in-out infinite }
 .ai-core { position: absolute; left: 50%; top: 50%; width: 170px; height: 170px; transform: translate(-50%, -50%); display: grid; place-items: center }
 .core-halo { position: absolute; inset: -30px; border-radius: 50%; background: radial-gradient(circle, rgb(var(--v-accent-rgb) / .14) 0 22%, transparent 68%); filter: blur(4px); animation: breathe 3.5s ease-in-out infinite }
 .core-ring { position: absolute; inset: 9px; border-radius: 50%; border: 1px solid rgb(var(--v-accent-rgb) / .36); animation: spin 12s linear infinite }
@@ -263,9 +264,96 @@ img { display: block; max-width: 100% }
 .p1 { left: 28%; top: 43%; animation: pk1 2.8s linear infinite } .p2 { left: 38%; top: 36%; animation: pk2 2.2s linear infinite }
 .p3 { left: 59%; top: 42%; animation: pk3 2.6s linear infinite } .p4 { left: 32%; top: 59%; animation: pk4 2.4s linear infinite }
 .p5 { left: 58%; top: 61%; animation: pk5 2.7s linear infinite }
-.ai-readout { position: absolute; left: 0; right: 0; bottom: 0; height: 46px; display: flex; align-items: center; justify-content: center; gap: 11px; border-top: 1px solid var(--v-line-soft); font: 8px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--v-muted) }
+.ai-readout { position: absolute; left: 0; right: 0; bottom: 0; height: 46px; display: flex; align-items: center; justify-content: center; gap: 11px; font: 8px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--v-muted) }
 .ai-readout b { color: var(--v-accent); font-weight: 400 }
-.ai-readout em { position: absolute; right: 17px; font-style: normal; color: var(--v-accent) }
+.ai-readout em { position: absolute; right: 4px; font-style: normal; color: var(--v-accent) }
+
+/* ---------- Hero hover cards ---------- */
+.ai-node { cursor: default; outline: none; transition: transform .3s, border-color .3s, opacity .35s, filter .35s }
+.ai-node:hover, .ai-node:focus-visible { z-index: 20 }
+.ai-stage:has(.ai-node:hover, .ai-node:focus-visible) .ai-node:not(:hover, :focus-visible) { opacity: .35; filter: saturate(.4) }
+.ai-stage:has(.ai-node:hover, .ai-node:focus-visible) .core-halo { animation-duration: 1.2s }
+.ai-wire { transition: opacity .3s, height .3s, box-shadow .3s }
+.ai-stage:has(.ai-node:hover, .ai-node:focus-visible) .ai-wire { opacity: .18 }
+.ai-stage:has(.n-rag:hover, .n-rag:focus-visible) .w1, .ai-stage:has(.n-agent:hover, .n-agent:focus-visible) .w2,
+.ai-stage:has(.n-vlm:hover, .n-vlm:focus-visible) .w3, .ai-stage:has(.n-sql:hover, .n-sql:focus-visible) .w4,
+.ai-stage:has(.n-tools:hover, .n-tools:focus-visible) .w5, .ai-stage:has(.n-out:hover, .n-out:focus-visible) .w6 { opacity: 1; height: 2px; box-shadow: 0 0 12px rgb(var(--v-accent-rgb) / .6) }
+
+.ai-pop {
+  position: absolute; top: -8px; left: calc(100% + 12px); z-index: 30; width: 232px; padding: 14px 14px 12px;
+  display: flex; flex-direction: column; gap: 6px; text-align: left; pointer-events: none;
+  background: rgb(14 15 11 / .94); border: 1px solid rgb(var(--v-accent-rgb) / .35); border-radius: 14px;
+  box-shadow: 0 24px 50px -18px rgb(0 0 0 / .8), 0 0 0 4px rgb(var(--v-accent-rgb) / .04);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  opacity: 0; visibility: hidden; transform: translateY(6px) scale(.96); transform-origin: left top;
+  transition: opacity .25s, transform .4s cubic-bezier(.32, 1.32, .42, 1), visibility 0s .25s;
+}
+.ai-pop.pop-left { left: auto; right: calc(100% + 12px); transform-origin: right top }
+/* Bottom boxes open upward so the card stays inside the hero */
+.n-sql .ai-pop, .n-tools .ai-pop { top: auto; bottom: -8px; transform-origin: left bottom }
+.n-tools .ai-pop { transform-origin: right bottom }
+.ai-node:hover .ai-pop, .ai-node:focus-visible .ai-pop { opacity: 1; visibility: visible; transform: none; transition: opacity .25s, transform .4s cubic-bezier(.32, 1.32, .42, 1), visibility 0s }
+@media (hover: none) { .ai-node:focus .ai-pop { opacity: 1; visibility: visible; transform: none; transition: opacity .25s, transform .4s cubic-bezier(.32, 1.32, .42, 1), visibility 0s } .ai-node:focus .pop-viz * { animation-play-state: running } }
+.pop-k { font: 8.5px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--v-accent) }
+.ai-pop h5 { margin: 0; font: 600 14px/1.25 var(--font-sans); letter-spacing: -.01em; color: var(--v-ink) }
+.ai-pop p { margin: 0; font: 11.5px/1.55 var(--font-sans); color: var(--v-muted) }
+.pop-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px }
+.pop-tags em { font: 9px var(--font-mono); font-style: normal; letter-spacing: .04em; padding: 3px 7px; border: 1px solid var(--v-line); border-radius: 99px; color: var(--v-ink) }
+.pop-viz { position: relative; height: 58px; margin: 4px 0 2px; border-radius: 9px; background: rgb(var(--v-accent-rgb) / .05); border: 1px solid var(--v-line-soft); overflow: hidden }
+/* The mini animations only run while their card is open */
+.pop-viz * { animation-play-state: paused }
+.ai-node:hover .pop-viz *, .ai-node:focus-visible .pop-viz * { animation-play-state: running }
+
+/* RAG: scan the chunks, one becomes the hit */
+.pv-rag { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 0 12px }
+.pv-rag i { height: 4px; border-radius: 2px; background: var(--v-line); width: 88% }
+.pv-rag i:nth-child(2) { width: 70% } .pv-rag i:nth-child(4) { width: 60% }
+.pv-rag i.hit { animation: pv-hit 2.4s ease-in-out infinite }
+.pv-rag b { position: absolute; left: 0; right: 0; height: 12px; background: linear-gradient(transparent, rgb(var(--v-accent-rgb) / .25), transparent); animation: pv-scan 2.4s ease-in-out infinite }
+/* Agents: plan → act → reflect, lit in turn */
+.pv-agent { display: flex; align-items: center; justify-content: center; gap: 6px }
+.pv-agent span { font: 9px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 8px; border: 1px solid var(--v-line); border-radius: 6px; color: var(--v-muted); animation: pv-step 2.7s linear infinite }
+.pv-agent span:nth-of-type(2) { animation-delay: .9s } .pv-agent span:nth-of-type(3) { animation-delay: 1.8s }
+.pv-agent i { width: 10px; height: 1px; background: var(--v-line) }
+/* Vision: scan line and a detection box */
+.pv-vlm { background: repeating-linear-gradient(135deg, rgb(var(--v-accent-rgb) / .05) 0 6px, transparent 6px 12px), rgb(var(--v-accent-rgb) / .03) }
+.pv-vlm .scan { position: absolute; left: 0; right: 0; height: 2px; background: var(--v-accent); box-shadow: 0 0 10px var(--v-accent); animation: pv-scan 2.2s ease-in-out infinite }
+.pv-vlm b { position: absolute; left: 34%; top: 22%; width: 34%; height: 52%; border: 1.5px solid var(--v-accent-2); border-radius: 4px; animation: pv-box 2.2s ease-in-out infinite }
+/* Text→SQL: query types, bars rise */
+.pv-sql { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 0 10px }
+.pv-sql code { font: 9.5px var(--font-mono); color: var(--v-ink); white-space: nowrap; overflow: hidden; width: 0; border-right: 1px solid var(--v-accent); animation: pv-type 3s steps(22) infinite }
+.pv-sql div { display: flex; align-items: flex-end; gap: 3px; height: 22px }
+.pv-sql div i { flex: 1; background: var(--v-accent); border-radius: 3px 3px 0 0; transform-origin: bottom; animation: pv-bar 3s ease-out infinite }
+.pv-sql div i:nth-child(1) { height: 55% } .pv-sql div i:nth-child(2) { height: 95%; animation-delay: .1s } .pv-sql div i:nth-child(3) { height: 70%; animation-delay: .2s } .pv-sql div i:nth-child(4) { height: 40%; animation-delay: .3s }
+/* Tools: each tool fires in sequence */
+.pv-tools { display: flex; align-items: center; justify-content: center; gap: 10px }
+.pv-tools i { width: 30px; height: 30px; display: grid; place-items: center; font-style: normal; font-size: 13px; border: 1px solid var(--v-line); border-radius: 8px; color: var(--v-muted); animation: pv-step 2.8s linear infinite }
+.pv-tools i:nth-child(2) { animation-delay: .7s } .pv-tools i:nth-child(3) { animation-delay: 1.4s } .pv-tools i:nth-child(4) { animation-delay: 2.1s }
+/* Grounded: answer lines, then citations pop in */
+.pv-out { display: flex; align-items: center; gap: 6px; padding: 0 12px }
+.pv-out div { flex: 1; display: flex; flex-direction: column; gap: 6px }
+.pv-out div i { height: 4px; border-radius: 2px; background: var(--v-line) } .pv-out div i.s { width: 60% }
+.pv-out span { font: 9px var(--font-mono); padding: 3px 5px; border-radius: 5px; background: var(--v-accent); color: var(--v-on-accent); animation: pv-pop 2.4s cubic-bezier(.32, 1.32, .42, 1) infinite }
+.pv-out span:nth-of-type(2) { animation-delay: .25s } .pv-out span:nth-of-type(3) { animation-delay: .5s }
+@keyframes pv-scan { 0%, 100% { top: 6% } 50% { top: 84% } }
+@keyframes pv-hit { 0%, 45% { background: var(--v-line) } 55%, 100% { background: var(--v-accent); box-shadow: 0 0 8px rgb(var(--v-accent-rgb) / .5) } }
+@keyframes pv-step { 0%, 30% { color: var(--v-on-accent); background: var(--v-accent); border-color: var(--v-accent) } 33%, 100% { color: var(--v-muted) } }
+@keyframes pv-box { 0%, 35% { opacity: 0; transform: scale(1.15) } 50%, 100% { opacity: 1; transform: none } }
+@keyframes pv-type { 0% { width: 0 } 55%, 100% { width: 22ch } }
+@keyframes pv-bar { 0%, 50% { transform: scaleY(0) } 75%, 100% { transform: scaleY(1) } }
+@keyframes pv-pop { 0%, 30% { transform: scale(0) } 45%, 100% { transform: scale(1) } }
+[data-theme="mono"] .ai-pop { background: rgba(255, 255, 255, .92); border-color: rgba(255, 255, 255, .95); box-shadow: inset 0 1px 0 #fff, 0 24px 48px -18px rgba(18, 18, 20, .35), 0 0 0 1px rgba(18, 18, 20, .06) }
+[data-theme="mono"] .pop-viz { background: rgba(18, 18, 20, .03) }
+
+/* Mono: light glass instead of the dark card */
+[data-theme="mono"] .ai-console {
+  --v-ink: #121214; --v-muted: #6c6c73; --v-accent: #121214; --v-accent-rgb: 18 18 20; --v-on-accent: #fff; --v-accent-2: #6c6c73; --v-accent-2-rgb: 108 108 115;
+  --v-line: rgba(18, 18, 20, .14); --v-line-soft: rgba(18, 18, 20, .08);
+  background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(255, 255, 255, .85), transparent 72%);
+}
+[data-theme="mono"] .ai-node { background: rgba(255, 255, 255, .72); border-color: rgba(255, 255, 255, .9); box-shadow: inset 0 1px 0 #fff, 0 12px 28px -14px rgba(18, 18, 20, .3); -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%) }
+[data-theme="mono"] .core-logo { color: #fff; border-color: transparent; background: linear-gradient(180deg, #2a2a2f, #0c0c0e); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 18px 36px -14px rgba(0, 0, 0, .55) }
+[data-theme="mono"] .core-logo span { color: rgba(255, 255, 255, .6) }
 
 /* ---------- Signal band ---------- */
 .signals { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--line); background: var(--bg-2); margin-top: 16px }
@@ -735,6 +823,9 @@ img { display: block; max-width: 100% }
   .ai-console { min-height: 360px }
   .ai-node { width: 88px; padding: 7px } .ai-node strong { font-size: 8px } .ai-node small { font-size: 6px }
   .ai-core { width: 140px; height: 140px } .core-logo { width: 70px; height: 70px; font-size: 21px }
+  .ai-prompt { left: 4%; right: auto; align-items: flex-start; text-align: left }
+  .ai-prompt i { background: linear-gradient(90deg, var(--v-accent), transparent) }
+  .ai-pop { width: 190px }
   .n-rag { left: 3% } .n-agent { left: auto; right: 6%; top: 5% } .n-vlm { top: 26% } .n-vlm { right: 3% } .n-sql { left: 10% } .n-tools { right: 10% } .n-out { right: 1% }
   .ai-readout em { display: none }
   .hero-foot { flex-direction: column; align-items: flex-start }
