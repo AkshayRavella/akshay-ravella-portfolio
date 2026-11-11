@@ -2,7 +2,7 @@
 (() => {
   const root = document.documentElement;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const THEME_COLORS = { acid: '#11110f', mono: '#e8e8eb' };
+  const THEME_COLORS = { acid: '#11110f', paper: '#f5f3ec' };
 
   /* ---------- Theme ---------- */
   const themeMeta = document.querySelector('meta[name="theme-color"]');
@@ -10,9 +10,10 @@
     root.dataset.theme = theme;
     try { localStorage.setItem('ar-theme', theme); } catch (e) { /* private mode */ }
     if (themeMeta) themeMeta.content = THEME_COLORS[theme];
-    document.querySelectorAll('[data-theme-label]').forEach(el => { el.textContent = theme === 'acid' ? 'Mono' : 'Acid'; });
+    document.querySelectorAll('[data-theme-label]').forEach(el => { el.textContent = theme === 'acid' ? 'Paper' : 'Acid'; });
   };
-  applyTheme(root.dataset.theme === 'mono' ? 'mono' : 'acid');
+  // Themes in use: acid (dark) and paper (light). The mono styles are kept in the CSS but not offered.
+  applyTheme(root.dataset.theme === 'paper' ? 'paper' : 'acid');
 
   // Mono theme backdrop: faint contour lines (same recipe as the liquid-glass design system).
   const contours = document.querySelector('.contours');
@@ -22,7 +23,7 @@
   }).join('');
 
   document.querySelectorAll('[data-theme-toggle]').forEach(btn => btn.addEventListener('click', e => {
-    const next = root.dataset.theme === 'acid' ? 'mono' : 'acid';
+    const next = root.dataset.theme === 'acid' ? 'paper' : 'acid';
     if (!document.startViewTransition || reduced) return applyTheme(next);
     // Circular reveal that grows out of the toggle button.
     const r = btn.getBoundingClientRect();
@@ -36,6 +37,33 @@
     ));
     vt.finished.finally(() => root.classList.remove('theme-switching'));
   }));
+
+  /* ---------- Page turn between case studies ---------- */
+  // The link's direction is handed to the next page, which plays the turn in its pagereveal handler (see <head>).
+  // Browsers without cross-document view transitions get a hand-built version: a page-coloured panel
+  // sweeps in diagonally, and the next page opens with that panel sweeping away (see .turn-cover in CSS).
+  const nativeTurn = 'PageRevealEvent' in window;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[data-turn]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    const dir = a.dataset.turn === 'prev' ? 'prev' : 'next';
+    if (nativeTurn) {
+      try { sessionStorage.setItem('ar-vt', dir); } catch (err) { /* storage unavailable */ }
+      root.classList.add('vt-turn-out'); // drop shared-element names so only the page itself turns
+      return;
+    }
+    if (reduced) return;
+    e.preventDefault();
+    try { sessionStorage.setItem('ar-vt-cover', dir); } catch (err) { /* storage unavailable */ }
+    const cover = document.createElement('div');
+    cover.className = `turn-cover turn-${dir}`;
+    document.body.appendChild(cover);
+    let gone = false;
+    const go = () => { if (!gone) { gone = true; location.href = a.href; } };
+    cover.addEventListener('animationend', go, { once: true });
+    setTimeout(go, 900);
+  });
+  addEventListener('pageshow', () => root.classList.remove('vt-turn-out'));
 
   /* ---------- Nav ---------- */
   const nav = document.querySelector('.nav');
@@ -114,6 +142,14 @@
     }), { threshold: 0.6 });
     els.forEach(el => io.observe(el));
   };
+
+  // Footer: Akshay's local time (IST), refreshed every 30s.
+  const clock = document.querySelector('[data-local-time]');
+  if (clock) {
+    const fmt = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit', hour12: true });
+    const tick = () => { clock.textContent = fmt.format(new Date()).toUpperCase() + ' IST'; };
+    tick(); setInterval(tick, 30000);
+  }
 
   revealAll();
   countAll();

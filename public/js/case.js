@@ -64,7 +64,7 @@
     <nav class="cs-toc" aria-label="On this page">
       <span class="label">On this page</span>
       <ol>${sections.map(([id, t]) => `<li><a href="#${id}">${t}</a></li>`).join('')}</ol>
-      <a class="btn btn-primary cs-toc-next" href="/work/${next.slug}/">Next: ${next.short} ${arrow}</a>
+      <a class="btn btn-primary cs-toc-next" href="/work/${next.slug}/" data-turn="next">Next: ${next.short} ${arrow}</a>
     </nav>
 
     <div class="cs-content">
@@ -130,13 +130,13 @@
   </div>
 
   <section class="cs-next shell">
-    <a class="cs-next-card" href="/work/${next.slug}/" data-reveal>
+    <a class="cs-next-card" href="/work/${next.slug}/" data-turn="next" data-reveal>
       <span class="label">Next project · ${pad((idx + 1) % N + 1)} / ${pad(N)}</span>
       <strong>${next.name}</strong>
       <span class="cs-next-lead">${next.lead}</span>
       <span class="cs-next-arrow">${arrow}</span>
     </a>
-    <div class="cs-next-row" data-reveal><a class="label" href="/work/${prev.slug}/">← ${prev.name}</a><a class="label" href="/#work">All work</a></div>
+    <div class="cs-next-row" data-reveal><a class="label" href="/work/${prev.slug}/" data-turn="prev">← ${prev.name}</a><a class="label" href="/#work">All work</a></div>
   </section>`;
 
   // Hooks that need main.js (registered after it has run).

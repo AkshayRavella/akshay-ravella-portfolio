@@ -164,3 +164,14 @@
   .cs-role .asterisk { position: static; display: block; margin-bottom: 8px }
   .arch { padding: 14px }
 }
+
+/* Paper theme */
+[data-theme="paper"] .cs-frame { border-radius: 26px; box-shadow: 0 1px 0 #fff inset, 0 50px 90px -44px rgba(48, 44, 20, .45) }
+[data-theme="paper"] .cs-frame .viz { border-radius: 14px }
+[data-theme="paper"] .arch { --font-mono: "DM Mono", monospace; border-color: var(--v-border) }
+[data-theme="paper"] .arch-zone li { background: rgba(21, 20, 15, .025) }
+[data-theme="paper"] .cs-next-card::before { background: var(--hl) }
+[data-theme="paper"] .cs-next-card:hover, [data-theme="paper"] .cs-next-card:hover .label, [data-theme="paper"] .cs-next-card:hover .cs-next-lead { color: var(--ink) }
+[data-theme="paper"] .flow-step.is-lit .flow-n { background: var(--hl); border-color: var(--ink); color: var(--ink) }
+[data-theme="paper"] .flow-n { background: var(--bg) }
+[data-theme="paper"] .cs-tagrow .tag { color: var(--accent); border-color: rgb(var(--ring-rgb) / .4) }
