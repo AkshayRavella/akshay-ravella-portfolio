@@ -623,7 +623,7 @@ img { display: block; max-width: 100% }
 
 /* ---------- Contact + footer ---------- */
 .contact { position: relative; overflow: hidden; padding-bottom: 0 }
-.contact-word { position: absolute; top: 140px; left: 4%; pointer-events: none; white-space: nowrap; font: 700 clamp(110px, 20vw, 290px)/.8 var(--font-display); letter-spacing: -.08em; color: transparent; -webkit-text-stroke: 1px var(--line) }
+.contact-word { position: absolute; top: 140px; left: 4%; pointer-events: none; white-space: nowrap; font: 700 clamp(56px, 17vw, 300px)/.8 var(--font-display); letter-spacing: -.08em; color: transparent; -webkit-text-stroke: 1px var(--line) }
 [data-theme="acid"] .contact-word { color: #191914; -webkit-text-stroke: 0 }
 .contact-body { position: relative; z-index: 1; padding: 90px 0 100px; max-width: 820px }
 .contact-body .label { display: flex; align-items: center; gap: 10px }
