@@ -144,6 +144,10 @@ body {
 a { color: inherit; text-decoration: none }
 button { font: inherit; color: inherit }
 img { display: block; max-width: 100% }
+/* Inline SVG icons that replace symbol characters (iOS would draw those as colour emoji). */
+.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -.125em; flex-shrink: 0 }
+/* Belt and braces: prefer text-style glyphs for any remaining symbols. */
+html { font-variant-emoji: text }
 ::selection { background: var(--accent); color: var(--on-accent) }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px }
 .skip { position: absolute; left: -999px; top: 8px; z-index: 100; background: var(--accent); color: var(--on-accent); padding: 8px 14px }

@@ -25,7 +25,7 @@ window.renderViz = (() => {
           <div class="rag-cites"><i></i><i></i><i></i></div>
           <div class="rag-src"><em>p.14</em><em>p.3</em><em>slide 7</em></div>
         </div>
-      </div>`, ['Agents · retrieval · citations', '↗ Context → answer']),
+      </div>`, ['Agents · retrieval · citations', '<svg class="ico" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.985 4L12 10.77h-1.069V6.607l.015-.8L4.742 12 4 11.244l6.204-6.207-.727.015H5.217V4z"/></svg> Context → answer']),
 
     rfp: () => frame(['02 · Proposal automation', 'Compliance matrix'], `
       <div class="rfp">
@@ -51,7 +51,7 @@ window.renderViz = (() => {
         <div class="clm-chain">
           <b style="--i:0">Ingest</b><b style="--i:1">Extract</b><b style="--i:2">Validate</b><b style="--i:3">Risk</b><b style="--i:4">Decide</b><b style="--i:5">Route</b>
         </div>
-        <div class="clm-hitl"><span>⏸</span><div><strong>Human checkpoint</strong><small>state saved · resumes exactly here</small></div></div>
+        <div class="clm-hitl"><span><svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></span><div><strong>Human checkpoint</strong><small>state saved · resumes exactly here</small></div></div>
         <div class="clm-card">
           <small>Claim · auto · new</small><strong>Ready for adjuster</strong>
           <div class="clm-meter"><span>Fraud risk</span><div><i></i></div><em>Low</em></div>
