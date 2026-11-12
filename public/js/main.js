@@ -145,6 +145,9 @@
     els.forEach(el => io.observe(el));
   };
 
+  // Current year (e.g. "Portfolio / 2027" next year), so nothing needs editing on New Year.
+  document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
   // Footer: Akshay's local time (IST), refreshed every 30s.
   const clock = document.querySelector('[data-local-time]');
   if (clock) {
