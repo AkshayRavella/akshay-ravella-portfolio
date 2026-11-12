@@ -147,7 +147,10 @@ void main(){
     const accent = rgb.length === 3 && rgb.every(n => !isNaN(n)) ? rgb.map(n => n / 255) : [0.84, 0.98, 0.39];
     let accent2 = [1, 0.54, 0.37];
     try { const a2 = cs.getPropertyValue('--accent-2'); if (a2.trim().startsWith('#')) accent2 = hex(a2); } catch (e) { /* keep default */ }
-    const paper = document.documentElement.dataset.theme === 'paper';
+    const theme = document.documentElement.dataset.theme;
+    const paper = theme === 'paper';
+    // Lavender: Deep Indigo ink with the faintest drift toward Tangerine Glow.
+    if (theme === 'lavender') { colors = { smoke: [0.17, 0.18, 0.36], smoke2: [1, 0.54, 0.12], drift: 0.08, hot: 0, strength: 15, lift: 0.62, depth: 0.42 }; return; }
     colors = paper
       // Paper uses Acid's lime family, deepened to read on a light page: leaf green drifting to a deeper forest green.
       ? { smoke: [0.36, 0.62, 0.04], smoke2: [0.16, 0.42, 0.12], drift: 0.45, hot: 0, strength: 16, lift: 0.62, depth: 0.62 }

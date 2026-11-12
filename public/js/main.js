@@ -2,7 +2,9 @@
 (() => {
   const root = document.documentElement;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const THEME_COLORS = { acid: '#11110f', paper: '#f5f3ec' };
+  const THEME_COLORS = { acid: '#11110f', paper: '#f5f3ec', lavender: '#dcdbe6' };
+  // The light theme offered by the toggle. 'lavender' is still fully styled; set this to 'lavender' to use it.
+  const LIGHT = 'paper';
 
   /* ---------- Theme ---------- */
   const themeMeta = document.querySelector('meta[name="theme-color"]');
@@ -10,10 +12,10 @@
     root.dataset.theme = theme;
     try { localStorage.setItem('ar-theme', theme); } catch (e) { /* private mode */ }
     if (themeMeta) themeMeta.content = THEME_COLORS[theme];
-    document.querySelectorAll('[data-theme-label]').forEach(el => { el.textContent = theme === 'acid' ? 'Paper' : 'Acid'; });
+    document.querySelectorAll('[data-theme-label]').forEach(el => { el.textContent = theme === 'acid' ? LIGHT[0].toUpperCase() + LIGHT.slice(1) : 'Acid'; });
   };
-  // Themes in use: acid (dark) and paper (light). The mono styles are kept in the CSS but not offered.
-  applyTheme(root.dataset.theme === 'paper' ? 'paper' : 'acid');
+  // Themes in use: acid (dark) and LIGHT. Lavender and mono styles are kept in the CSS but not offered.
+  applyTheme(root.dataset.theme === 'acid' || !root.dataset.theme ? 'acid' : LIGHT);
 
   // Mono theme backdrop: faint contour lines (same recipe as the liquid-glass design system).
   const contours = document.querySelector('.contours');
@@ -23,7 +25,7 @@
   }).join('');
 
   document.querySelectorAll('[data-theme-toggle]').forEach(btn => btn.addEventListener('click', e => {
-    const next = root.dataset.theme === 'acid' ? 'paper' : 'acid';
+    const next = root.dataset.theme === 'acid' ? LIGHT : 'acid';
     if (!document.startViewTransition || reduced) return applyTheme(next);
     // Circular reveal that grows out of the toggle button.
     const r = btn.getBoundingClientRect();

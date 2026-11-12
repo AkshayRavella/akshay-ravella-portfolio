@@ -93,8 +93,8 @@
 .flow-tab:hover { color: var(--ink); border-color: var(--accent) }
 .flow-tab.is-active { background: var(--accent); border-color: var(--accent); color: var(--on-accent) }
 .flow-tab.is-active .label { color: var(--on-accent); opacity: .65 }
-[data-theme="paper"] .flow-tab.is-active { background: var(--hl); border-color: var(--ink); color: var(--ink) }
-[data-theme="paper"] .flow-tab.is-active .label { color: var(--ink) }
+:is([data-theme="paper"], [data-theme="lavender"]) .flow-tab.is-active { background: var(--solid); border-color: var(--ink); color: var(--on-solid) }
+:is([data-theme="paper"], [data-theme="lavender"]) .flow-tab.is-active .label { color: var(--on-solid) }
 .flow-sub { margin: 0 0 22px; font: var(--title-w) 20px/1.3 var(--font-display); letter-spacing: -.02em; color: var(--ink-2) }
 .flow-panel[hidden] { display: none }
 .flow-panel.is-active .flow-sub, .flow-panel.is-active .flow-step { animation: flow-in .55s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, -1) * .07s + .07s) }
@@ -183,12 +183,12 @@
 }
 
 /* Paper theme */
-[data-theme="paper"] .cs-frame { border-radius: 26px; box-shadow: 0 1px 0 #fff inset, 0 50px 90px -44px rgba(48, 44, 20, .45) }
-[data-theme="paper"] .cs-frame .viz { border-radius: 14px }
-[data-theme="paper"] .arch { --font-mono: "DM Mono", monospace; border-color: var(--v-border) }
-[data-theme="paper"] .arch-zone li { background: rgba(21, 20, 15, .025) }
-[data-theme="paper"] .cs-next-card::before { background: var(--hl) }
-[data-theme="paper"] .cs-next-card:hover, [data-theme="paper"] .cs-next-card:hover .label, [data-theme="paper"] .cs-next-card:hover .cs-next-lead { color: var(--ink) }
-[data-theme="paper"] .flow-step.is-lit .flow-n { background: var(--hl); border-color: var(--ink); color: var(--ink) }
-[data-theme="paper"] .flow-n { background: var(--bg) }
-[data-theme="paper"] .cs-tagrow .tag { color: var(--accent); border-color: rgb(var(--ring-rgb) / .4) }
+:is([data-theme="paper"], [data-theme="lavender"]) .cs-frame { border-radius: 26px; box-shadow: 0 1px 0 #fff inset, 0 50px 90px -44px rgb(var(--shadow-rgb) / .45) }
+:is([data-theme="paper"], [data-theme="lavender"]) .cs-frame .viz { border-radius: 14px }
+:is([data-theme="paper"], [data-theme="lavender"]) .arch { --font-mono: "DM Mono", monospace; border-color: var(--v-border) }
+:is([data-theme="paper"], [data-theme="lavender"]) .arch-zone li { background: rgb(var(--ink-rgb) / .025) }
+:is([data-theme="paper"], [data-theme="lavender"]) .cs-next-card::before { background: var(--solid) }
+:is([data-theme="paper"], [data-theme="lavender"]) .cs-next-card:hover, :is([data-theme="paper"], [data-theme="lavender"]) .cs-next-card:hover .label, :is([data-theme="paper"], [data-theme="lavender"]) .cs-next-card:hover .cs-next-lead { color: var(--on-solid) }
+:is([data-theme="paper"], [data-theme="lavender"]) .flow-step.is-lit .flow-n { background: var(--solid); border-color: var(--ink); color: var(--on-solid) }
+:is([data-theme="paper"], [data-theme="lavender"]) .flow-n { background: var(--bg) }
+:is([data-theme="paper"], [data-theme="lavender"]) .cs-tagrow .tag { color: var(--accent); border-color: rgb(var(--ring-rgb) / .4) }
