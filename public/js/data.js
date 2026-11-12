@@ -192,16 +192,16 @@ window.PROJECTS = [
     impact: 'Durable HITL · zero reprocessing on resume',
     summary: 'A serverless multi-agent platform for insurance claims intake. A LangGraph orchestrator coordinates specialised agents, each its own Lambda, to classify, extract, consolidate, validate, risk-score and route every new claim, and checkpoints the workflow whenever a human needs to step in.',
     meta: [
-      ['Role', 'Agentic architecture & high-level design'],
+      ['Role', 'Agentic architecture & backend engineering'],
       ['Domain', 'Insurance · claims intake'],
       ['Platform', 'AWS serverless · Amazon Bedrock'],
       ['Pattern', 'Orchestrator + specialist agents']
     ],
     metrics: [
       { value: 7, suffix: '', label: 'Independent serverless agents' },
-      { value: 7, suffix: '', label: 'Intake channels, one claim model' },
-      { value: 11, suffix: '', label: 'Step pause → review → resume flow' },
-      { value: 0, suffix: '', label: 'Steps reprocessed after a human resumes' }
+      { value: 5, suffix: '', label: 'Risk & propensity scores per claim' },
+      { value: 6, suffix: '', label: 'Purpose-built data stores' },
+      { value: 6, suffix: '', label: 'Role-scoped user groups' }
     ],
     problem: [
       'Reporting a loss starts the claims lifecycle, and intake has traditionally meant people reading emails, industry claim forms, scans and photos. They re-key the data, check coverage, look for duplicates, judge fraud risk, estimate reserves and pick an adjuster.',

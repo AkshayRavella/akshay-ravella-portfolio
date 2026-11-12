@@ -16,10 +16,7 @@
     ['flow', 'How it works'],
     p.chart && ['signals', 'The model'],
     ['features', 'Capabilities'],
-    ['decisions', 'Engineering decisions'],
-    ['governance', 'Security & governance'],
-    ['stack', 'Stack'],
-    ['role', 'My role']
+    ['stack', 'Stack']
   ].filter(Boolean);
 
   const head = (id, n, title) => `<div class="cs-head" data-reveal><span class="label"><b>${pad(n)}</b> ${title}</span></div>`;
@@ -107,25 +104,11 @@
         <div class="feat-grid">${p.features.map(([t, d], i) => `<div class="feat surface" data-reveal><span class="label">${pad(i + 1)}</span><strong>${t}</strong><p>${d}</p></div>`).join('')}</div>
       </section>
 
-      <section id="decisions" class="cs-sec">
-        ${head('decisions', n('decisions'), 'Engineering decisions')}
-        <div class="dec-list">${p.highlights.map(([t, d]) => `<div class="dec" data-reveal><strong>${t}</strong><p>${d}</p></div>`).join('')}</div>
-      </section>
-
-      <section id="governance" class="cs-sec">
-        ${head('governance', n('governance'), 'Security & governance')}
-        <ul class="gov">${p.security.map(s => `<li data-reveal><span>✓</span>${s}</li>`).join('')}</ul>
-      </section>
-
       <section id="stack" class="cs-sec">
         ${head('stack', n('stack'), 'Stack')}
         <div class="stack-groups">${Object.entries(p.stack).map(([g, items]) => `<div class="stack-group" data-reveal><span class="label">${g}</span><div>${items.map(t => `<span class="tag">${t}</span>`).join('')}</div></div>`).join('')}</div>
       </section>
 
-      <section id="role" class="cs-sec">
-        ${head('role', n('role'), 'My role')}
-        <blockquote class="cs-role" data-reveal><span class="asterisk">✳</span>${p.role}</blockquote>
-      </section>
     </div>
   </div>
 
