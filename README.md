@@ -1,20 +1,39 @@
 # Akshay Ravella — AI Engineer Portfolio
 
-A responsive, motion-led portfolio highlighting AI engineering, Agentic RAG, Text-to-SQL, AI-powered test generation, vision-language models, and intelligent data products.
+A motion-led portfolio for agentic AI, enterprise RAG and production AI systems. It has two themes and a case-study page for each project.
 
-## Repository contents
+## Highlights
 
-- `public/index.html` — complete portfolio page, case studies, experience, education, certifications, and contact links
-- `public/theme.css` — responsive design system, animated AI architecture hero, project visuals, and scroll effects
-- `public/app.js` — scroll reveals, count-up metrics, reading progress, and responsive mobile navigation
+- **Selected work wheel:** a pinned scroll section modelled on LangChain's lifecycle wheel. Scroll progress picks a project, the wheel rotates, the active pill collapses into an icon, and the copy and illustration transition with it. Below 992px it becomes stacked panels with a sticky pill bar.
+- **Two themes:**
+  - **Acid:** signal yellow on black.
+  - **Mono:** monochrome liquid-glass, with light pools and contour lines.
 
-## Live version
+  The toggle uses a circular View Transitions reveal and the choice persists in `localStorage`.
+- **Case studies** at `/work/<slug>/`: each has a hero, key metrics, a sticky scroll-spy contents list, an animated architecture map, a step-by-step flow, capabilities, engineering decisions, governance, stack and role. Cross-document view transitions morph the illustration and title from the home page.
+- **Illustrations:** pure HTML/CSS and theme-aware. They are sized with container query units, so they scale from the wheel card to the case-study hero.
 
-https://akshay-ravella.hatchable.site
+## Structure
+
+```
+public/
+  index.html              home page
+  work/<slug>/index.html  case-study shells (content rendered from data.js)
+  css/main.css            design tokens (both themes), layout, wheel, illustrations
+  css/case.css            case-study layout
+  js/data.js              project content: single source of truth
+  js/visuals.js           animated project illustrations
+  js/main.js              theme, nav, reveals, counters, scroll hooks
+  js/home.js              selected-work wheel + experience timeline
+  js/case.js              case-study renderer, scroll-spy, chart tooltip
+  assets/akshay.jpg       portrait
+```
+
+To add or edit a project, change `js/data.js`. If it is a new project, also add a `work/<slug>/index.html` shell.
 
 ## Run locally
 
-This is a static site with no build or npm step required:
+This is a static site with no build step. Paths are root-absolute, so serve the `public/` directory itself:
 
 ```bash
 cd public
@@ -25,6 +44,4 @@ Open http://localhost:8000.
 
 ## Deploy
 
-The web assets are kept inside `public/`. This works with static hosting providers configured to publish that directory. GitHub Pages can be enabled with a workflow that uploads `public/` as the Pages artifact.
-
-Fonts are loaded from Google Fonts at runtime (DM Sans, DM Mono, and Space Grotesk).
+Publish the `public/` directory to any static host at the domain root. Fonts are loaded from Google Fonts (Space Grotesk, DM Sans, DM Mono) for the Acid theme. The Mono theme uses the system font stack.

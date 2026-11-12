@@ -1,105 +1,189 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="acid">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#11110f">
-<meta name="description" content="Akshay Ravella — Data & AI Engineer building agentic systems, enterprise AI, and intelligent data experiences.">
-<title>Akshay Ravella — Data × Intelligence</title>
+<meta name="description" content="Akshay Ravella — Data & AI Engineer building agentic systems, enterprise RAG, and production AI products.">
+<meta property="og:title" content="Akshay Ravella — AI Engineer">
+<meta property="og:description" content="Agentic systems, grounded retrieval and AI products that hold up in production.">
+<meta property="og:image" content="/assets/akshay.jpg">
+<title>Akshay Ravella — AI Engineer</title>
+<script>try{var t=localStorage.getItem('ar-theme');if(t==='mono'||t==='lavender')t='paper';if(t==='paper'||t==='acid')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2311110f'/%3E%3Ctext x='5' y='22' font-family='Arial' font-weight='700' font-size='14' fill='%23d7fa63'%3EAR%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/theme.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css?v=2026111104">
 </head>
 <body>
-<div class="noise" aria-hidden="true"></div>
-<div class="progress" id="progress"></div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="bg-canvas" aria-hidden="true"><div class="pool pool-a"></div><div class="pool pool-b"></div><div class="pool pool-c"></div><svg class="contours" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice"></svg></div>
+<div class="progress" aria-hidden="true"></div>
+
 <header class="nav">
-  <a class="brand" href="#top" aria-label="Akshay Ravella home"><span class="brand-mark">AR<span>↗</span></span><span class="brand-name">AKSHAY RAVELLA</span></a>
-  <nav class="nav-links"><a href="#work">Selected work</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
-  <a class="nav-cta" href="mailto:akshayravella@gmail.com">LET'S TALK <span>↗</span></a>
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+  <a class="brand" href="/" aria-label="Akshay Ravella home"><span class="brand-mark">AR<span>↗</span></span><span class="brand-name">AKSHAY RAVELLA</span></a>
+  <nav class="nav-links" aria-label="Primary"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <div class="nav-actions">
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme"><span class="tt-icon"></span><span data-theme-label>Paper</span></button>
+    <a class="btn btn-primary nav-cta" href="mailto:akshayravella@gmail.com">Let's talk <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.985 4L12 10.77h-1.069V6.607l.015-.8L4.742 12 4 11.244l6.204-6.207-.727.015H5.217V4z"/></svg></a>
+    <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><i></i><i></i></button>
+  </div>
 </header>
-<main id="top">
-<section class="hero section-shell">
-  <div class="hero-topline reveal"><span class="eyebrow"><i class="live-dot"></i> DATA & AI ENGINEER · INDIA</span><span class="mono hero-index">PORTFOLIO / 2026 — 01</span></div>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero shell" id="top">
+  <canvas class="hero-fluid" aria-hidden="true"></canvas>
+  <div class="hero-top" data-reveal><span class="label"><i class="live-dot"></i> AI Engineer · Hyderabad, India</span><span class="label">Portfolio / <span data-year>2026</span></span></div>
   <div class="hero-grid">
     <div class="hero-copy">
-      <p class="hero-pre reveal">I ENGINEER <span>INTELLIGENCE.</span></p>
-      <h1 class="hero-title"><span class="title-line reveal">I build</span><span class="title-line reveal"><em>AI systems.</em></span><span class="title-line reveal">That <span class="outline-word">work.</span></span></h1>
-      <div class="hero-bottom reveal"><p>Agentic AI, retrieval systems, vision-language models, and intelligent data products — engineered to move from model to measurable outcome.</p><a class="round-link" href="#work" aria-label="Explore selected work"><span>↓</span></a></div>
+      <p class="hero-pre label" data-reveal>I engineer <b>intelligence.</b></p>
+      <h1 class="hero-title"><span class="line"><span style="--i:0">I build</span></span><span class="line"><span style="--i:1"><em>agentic AI</em></span></span><span class="line"><span style="--i:2">that <span class="outline-word">ships.</span></span></span></h1>
+      <div class="hero-bottom" data-reveal><p>Retrieval systems, multi-agent workflows and AI products, engineered to get from model to measurable outcome and to hold up in production.</p><a class="round-link" href="#work" aria-label="Explore selected work">↓</a></div>
     </div>
-    <div class="hero-art ai-console reveal" aria-label="Interactive AI systems architecture visualization">
-      <div class="art-label mono"><span>FIG 01 / AI SYSTEM ARCHITECTURE</span><span class="ai-status">● INFERENCE ONLINE</span></div>
+    <div class="ai-console" data-reveal role="img" aria-label="Animated diagram of an AI system: retrieval, agents, vision, text-to-SQL and tools around a central engine">
       <div class="ai-stage">
-        <div class="ai-grid-lines"></div>
-        <div class="ai-prompt mono"><span>USER INTENT</span><b>“FIND THE ANSWER.”</b><i></i></div>
-        <div class="ai-core"><div class="core-halo"></div><div class="core-ring cr1"></div><div class="core-ring cr2"></div><div class="core-ring cr3"></div><div class="core-logo">AI<span>ENGINE</span></div><div class="core-scan"></div></div>
-        <div class="ai-node node-rag"><span class="node-icon">⌁</span><strong>RAG</strong><small>RETRIEVE</small></div>
-        <div class="ai-node node-agent"><span class="node-icon">✦</span><strong>AGENTS</strong><small>REASON</small></div>
-        <div class="ai-node node-vlm"><span class="node-icon">◌</span><strong>VLM</strong><small>SEE</small></div>
-        <div class="ai-node node-sql"><span class="node-icon">▤</span><strong>TEXT→SQL</strong><small>QUERY</small></div>
-        <div class="ai-node node-tools"><span class="node-icon">↗</span><strong>TOOLS</strong><small>ACT</small></div>
-        <div class="ai-node node-output"><span class="node-icon">✓</span><strong>GROUNDED</strong><small>DELIVER</small></div>
-        <span class="packet packet1"></span><span class="packet packet2"></span><span class="packet packet3"></span><span class="packet packet4"></span><span class="packet packet5"></span>
-        <div class="ai-wire wire-rag"></div><div class="ai-wire wire-agent"></div><div class="ai-wire wire-vlm"></div><div class="ai-wire wire-sql"></div><div class="ai-wire wire-tools"></div><div class="ai-wire wire-output"></div>
+        <div class="ai-grid"></div>
+        <div class="ai-prompt"><span>User intent</span><b>“Find the answer.”</b><i></i></div>
+        <div class="ai-core"><div class="core-halo"></div><div class="core-ring"></div><div class="core-ring r2"></div><div class="core-ring r3"></div><div class="core-logo">AI<span>ENGINE</span></div><div class="core-scan"></div></div>
+        <div class="ai-node n-rag" tabindex="0"><div class="ai-face face-a"><span>⌁</span><strong>RAG</strong><small>Retrieve</small></div><div class="ai-face face-b" aria-hidden="true"><span>⌁</span><strong>RAG</strong><small>Retrieve</small></div><i class="ai-seam" aria-hidden="true"></i><div class="ai-pop pop-right" role="tooltip"><span class="pop-k">Retrieval</span><h5>Finds the right evidence</h5><p>Hybrid vector + keyword search, re-ranked, with page-level citations.</p><div class="pop-viz pv-rag"><i></i><i></i><i class="hit"></i><i></i><b></b></div><div class="pop-tags"><em>17K+ docs</em><em>pgvector</em><em>re-rank</em></div></div></div>
+        <div class="ai-node n-agent" tabindex="0"><div class="ai-face face-a"><span>✦</span><strong>AGENTS</strong><small>Reason</small></div><div class="ai-face face-b" aria-hidden="true"><span>✦</span><strong>AGENTS</strong><small>Reason</small></div><i class="ai-seam" aria-hidden="true"></i><div class="ai-pop pop-right" role="tooltip"><span class="pop-k">Orchestration</span><h5>Plans, acts, reflects</h5><p>Multi-agent graphs that break a request into steps and pick the right tools.</p><div class="pop-viz pv-agent"><span>Plan</span><i></i><span>Act</span><i></i><span>Reflect</span></div><div class="pop-tags"><em>LangGraph</em><em>Agno</em><em>ReAct</em></div></div></div>
+        <div class="ai-node n-vlm" tabindex="0"><div class="ai-face face-a"><span>◌</span><strong>VISION</strong><small>See</small></div><div class="ai-face face-b" aria-hidden="true"><span>◌</span><strong>VISION</strong><small>See</small></div><i class="ai-seam" aria-hidden="true"></i><div class="ai-pop pop-left" role="tooltip"><span class="pop-k">Vision-language</span><h5>Reads images, not just text</h5><p>Fine-tuned LLaMA 3.2 Vision on medical imaging; vision QA on generated slides.</p><div class="pop-viz pv-vlm"><i class="scan"></i><b></b></div><div class="pop-tags"><em>VLMs</em><em>fine-tuning</em><em>visual QA</em></div></div></div>
+        <div class="ai-node n-sql" tabindex="0"><div class="ai-face face-a"><span>▤</span><strong>TEXT→SQL</strong><small>Query</small></div><div class="ai-face face-b" aria-hidden="true"><span>▤</span><strong>TEXT→SQL</strong><small>Query</small></div><i class="ai-seam" aria-hidden="true"></i><div class="ai-pop pop-right" role="tooltip"><span class="pop-k">Natural-language data</span><h5>Ask the database anything</h5><p>Modular SQL generation with role-based access, query logging and auto charts.</p><div class="pop-viz pv-sql"><code>SELECT region, SUM(rev)</code><div><i></i><i></i><i></i><i></i></div></div><div class="pop-tags"><em>RBAC</em><em>D3.js</em><em>audit</em></div></div></div>
+        <div class="ai-node n-tools" tabindex="0"><div class="ai-face face-a"><span>↗</span><strong>TOOLS</strong><small>Act</small></div><div class="ai-face face-b" aria-hidden="true"><span>↗</span><strong>TOOLS</strong><small>Act</small></div><i class="ai-seam" aria-hidden="true"></i><div class="ai-pop pop-left" role="tooltip"><span class="pop-k">Tool use</span><h5>Takes real actions</h5><p>Function calling across search, databases, files and APIs, with MCP sources.</p><div class="pop-viz pv-tools"><i>⌕</i><i>▤</i><i>◔</i><i>✉</i></div><div class="pop-tags"><em>MCP</em><em>REST</em><em>function calls</em></div></div></div>
+        <div class="ai-node n-out" tabindex="0"><div class="ai-face face-a"><span>✓</span><strong>GROUNDED</strong><small>Deliver</small></div><div class="ai-face face-b" aria-hidden="true"><span>✓</span><strong>GROUNDED</strong><small>Deliver</small></div><i class="ai-seam" aria-hidden="true"></i><div class="ai-pop pop-left" role="tooltip"><span class="pop-k">Output</span><h5>Every claim is cited</h5><p>Answers, reports and decks that trace back to source, reviewed before release.</p><div class="pop-viz pv-out"><div><i></i><i></i><i class="s"></i></div><span>[1]</span><span>[2]</span><span>[3]</span></div><div class="pop-tags"><em>citations</em><em>HITL</em><em>evals</em></div></div></div>
+        <span class="packet p1"></span><span class="packet p2"></span><span class="packet p3"></span><span class="packet p4"></span><span class="packet p5"></span>
+        <div class="ai-wire w1"></div><div class="ai-wire w2"></div><div class="ai-wire w3"></div><div class="ai-wire w4"></div><div class="ai-wire w5"></div><div class="ai-wire w6"></div>
       </div>
-      <div class="ai-readout mono"><span>CONTEXT</span><b>→</b><span>REASONING</span><b>→</b><span>TOOL USE</span><b>→</b><span>OUTPUT</span><span class="readout-live">● 04 AGENTS ACTIVE</span></div>
+      <div class="ai-readout"><span>Context</span><b>→</b><span>Reasoning</span><b>→</b><span>Tool use</span><b>→</b><span>Output</span><em>● 05 systems live</em></div>
     </div>
   </div>
-  <div class="hero-foot reveal"><span class="scroll-cue"><span class="scroll-bar"></span> SCROLL TO EXPLORE</span><span class="mono">HYDERABAD, IN <span class="gold">/</span> OPEN TO BUILDING WHAT'S NEXT</span></div>
+  <div class="hero-foot label" data-reveal><span class="scroll-cue"><i></i> Scroll to explore</span><span>Open to building what's next</span></div>
 </section>
-<section class="signal-band" aria-label="Selected impact">
-  <div class="signal-item"><span class="signal-num" data-count="17" data-suffix="K+">17K+</span><span class="signal-label">DOCUMENTS IN RAG</span></div>
-  <div class="signal-item"><span class="signal-num" data-count="98" data-suffix="%">98%</span><span class="signal-label">TEST COVERAGE</span></div>
-  <div class="signal-item"><span class="signal-num" data-count="85" data-suffix="%">85%</span><span class="signal-label">TIME SAVED</span></div>
-  <div class="signal-item"><span class="signal-num" data-count="3" data-suffix="×">3×</span><span class="signal-label">RELEASE VELOCITY</span></div>
+
+<section class="signals" aria-label="Selected impact">
+  <div class="signal" data-reveal><span class="signal-num" data-count="17" data-suffix="K+">17K+</span><span class="label">Documents grounded in RAG</span></div>
+  <div class="signal" data-reveal><span class="signal-num" data-count="0.849" data-decimals="3">0.849</span><span class="label">ROC-AUC, priority model</span></div>
+  <div class="signal" data-reveal><span class="signal-num" data-count="6" data-suffix="×">6×</span><span class="label">Faster doc analysis (69→11 s)</span></div>
+  <div class="signal" data-reveal><span class="signal-num" data-count="98" data-suffix="%">98%</span><span class="label">Coverage, AI test generation</span></div>
 </section>
-<section id="manifesto" class="manifesto section-shell">
-  <div class="section-kicker reveal"><span class="kicker-index">01 / POINT OF VIEW</span><span class="kicker-line"></span><span class="kicker-right">BEYOND THE DEMO</span></div>
-  <div class="manifesto-grid"><h2 class="reveal">Not AI for the<br>headline. <span>AI for the<br>hard problem.</span></h2><div class="manifesto-copy reveal"><span class="asterisk">✳</span><p>I work at the intersection of data engineering, applied AI, and product thinking. My focus is on moving beyond one-off experiments — building systems that retrieve the right context, reason over it, respect permissions, and deliver something useful.</p><p class="manifesto-note mono">THE PRINCIPLE: MAKE COMPLEXITY USEFUL.</p></div></div>
+
+<!-- POINT OF VIEW -->
+<section class="section shell" id="manifesto">
+  <div class="kicker" data-reveal><b>01 / Point of view</b><i></i><span>Beyond the demo</span></div>
+  <div class="manifesto-grid">
+    <h2 class="h-display" data-reveal>Not AI for the headline. <span>AI for the hard problem.</span></h2>
+    <div class="manifesto-copy" data-reveal><span class="asterisk">✳</span><p>I work where applied AI, system design and product thinking meet. I build systems that retrieve the right context, reason over it, respect permissions and show their evidence. Then I do the unglamorous work that makes them survive contact with real users.</p><span class="label">The principle: make complexity useful.</span></div>
+  </div>
 </section>
-<section id="work" class="work section-shell">
-  <div class="section-kicker reveal"><span class="kicker-index">02 / SELECTED WORK</span><span class="kicker-line"></span><span class="kicker-right">BUILT FOR REAL-WORLD COMPLEXITY</span></div>
-  <div class="work-heading reveal"><h2>Selected <em>systems.</em></h2><p>A closer look at the problems, architecture, and outcomes behind the work.</p></div>
-  <article class="project project-feature reveal">
-    <div class="project-visual rag-visual"><div class="visual-meta mono"><span>01 — KNOWLEDGE SYSTEMS</span><span>AGENTIC RAG / AZURE</span></div><div class="rag-map"><div class="doc-stack"><div class="doc doc1">PDF<span>››</span></div><div class="doc doc2">PPT<span>››</span></div><div class="doc doc3">DOC<span>››</span></div><span class="node-label mono">17K+ SOURCES</span></div><div class="flow-line line1"></div><div class="flow-line line2"></div><div class="flow-line line3"></div><div class="agent-cluster"><div class="agent-hub">RAG<span>CORE</span></div><div class="agent-node an1">INTENT</div><div class="agent-node an2">RETRIEVE</div><div class="agent-node an3">REASON</div><div class="agent-node an4">CITE</div></div><div class="result-card"><span class="result-check">✓</span><strong>Grounded answer</strong><small>References + media</small><div class="result-lines"><i></i><i></i><i></i></div></div></div><div class="visual-bottom mono"><span>LANGCHAIN REACT AGENTS</span><span>↗ CONTEXT → ANSWER</span></div></div>
-    <div class="project-content"><div class="project-num mono">01 <span>— FEATURED</span></div><h3>Enterprise Agentic RAG</h3><p class="project-lede">From document overload to answers with evidence.</p><p>Built a multi-agent retrieval system for a networking and security enterprise, orchestrating intent classification, semantic retrieval, contextual reasoning, and reference-backed report generation across 17K+ documents.</p><div class="tag-list"><span>LangChain</span><span>Azure OpenAI</span><span>PGVector</span><span>Document Intelligence</span><span>Logic Apps</span></div><div class="project-foot"><span class="outcome">17K+ documents · feedback loop</span><span class="project-arrow">↗</span></div></div>
-  </article>
-  <article class="project project-reverse reveal">
-    <div class="project-visual sql-visual"><div class="visual-meta mono"><span>02 — DATA INTERFACES</span><span>TEXT-TO-SQL</span></div><div class="terminal-window"><div class="terminal-top"><div><b></b><b></b><b></b></div><span class="mono">query_session.sql</span><span class="mono">● CONNECTED</span></div><div class="terminal-body mono"><span class="terminal-muted">USER / NATURAL LANGUAGE</span><p class="prompt-line">“Compare quarterly revenue by region.”</p><span class="terminal-muted">AGENT / QUERY PLAN</span><p><i>SELECT</i> region, <i>SUM</i>(revenue)<br><i>FROM</i> sales<br><i>GROUP BY</i> region;</p><div class="terminal-result"><span>QUERY COMPLETE</span><span>4 ROWS · 0.42s</span></div><div class="chart-bars"><div style="height:46%"><span>NA</span></div><div style="height:82%"><span>EU</span></div><div style="height:64%"><span>APAC</span></div><div style="height:35%"><span>LATAM</span></div></div></div></div><div class="visual-bottom mono"><span>ASK → QUERY → INSIGHT</span><span>SQL / D3.JS</span></div></div>
-    <div class="project-content"><div class="project-num mono">02 <span>— NATURAL LANGUAGE DATA</span></div><h3>Text-to-SQL, made useful</h3><p class="project-lede">Let people ask their data real questions.</p><p>Developed natural-language database interaction with modular SQL generation, agent-driven result summaries, and visualizations selected dynamically from query results. Added role-based access, query logging, and token authentication for enterprise use.</p><div class="tag-list"><span>SQL</span><span>LLM Agents</span><span>D3.js</span><span>RBAC</span><span>Token Auth</span></div><div class="project-foot"><span class="outcome">Secure access · dynamic insights</span><span class="project-arrow">↗</span></div></div>
-  </article>
-  <article class="project reveal">
-    <div class="project-visual qa-visual"><div class="visual-meta mono"><span>03 — QUALITY ENGINEERING</span><span>AI TEST GENERATION</span></div><div class="qa-board"><div class="qa-source"><span class="source-icon">▤</span><strong>Requirements in</strong><small>BRD · Jira · Figma</small></div><div class="qa-pipeline"><span class="pipe-node">PARSE</span><i></i><span class="pipe-node active">GENERATE</span><i></i><span class="pipe-node">VALIDATE</span></div><div class="qa-output"><span class="output-check">✓</span><strong>Test suite ready</strong><small>Exportable · cloud-integrated</small><div class="mini-checks"><span>✓ Functional paths</span><span>✓ Edge cases</span><span>✓ Requirements mapped</span></div></div></div><div class="qa-stat-row"><div><b>98<span>%</span></b><small>TEST COVERAGE</small></div><div><b>85<span>%</span></b><small>TIME SAVINGS</small></div><div><b>3<span>×</span></b><small>RELEASE VELOCITY</small></div></div><div class="visual-bottom mono"><span>SPECIFICATION → VALIDATED TESTS</span><span>AI / QA</span></div></div>
-    <div class="project-content"><div class="project-num mono">03 <span>— BUILD QUALITY IN</span></div><h3>AI-powered test generation</h3><p class="project-lede">Turn product requirements into test-ready coverage.</p><p>Created a system that extracts requirements from BRDs, Jira epics, and Figma designs, then generates test cases with export and cloud integration to accelerate QA workflows.</p><div class="tag-list"><span>LLMs</span><span>Requirements Extraction</span><span>QA Automation</span><span>Cloud Integration</span></div><div class="project-foot"><span class="outcome">98% coverage · 85% less time</span><span class="project-arrow">↗</span></div></div>
-  </article>
-  <div class="more-work reveal"><span class="mono">ALSO EXPLORING</span><div class="more-work-item"><span class="mw-icon">◉</span><div><strong>Vision-language models for medical imaging</strong><small>Fine-tuning LLaMA 3.2 11B Vision Instruct across multiple imaging modalities; multi-agent cross-validation to support radiologists.</small></div><span class="mw-plus">↗</span></div><div class="more-work-item"><span class="mw-icon">⌁</span><div><strong>Agentic travel planner</strong><small>Memory-enabled agents, custom toolkits, booking APIs, weather, and route optimization through an Agentic Mesh architecture.</small></div><span class="mw-plus">↗</span></div></div>
+
+<!-- SELECTED WORK -->
+<div class="shell work-intro"><div class="kicker" data-reveal><b>02 / Selected work</b><i></i><span>Five systems · one engineer's lens</span></div></div>
+<section class="ww" id="work" aria-label="Selected work"></section>
+
+<!-- EXPERIENCE -->
+<section class="section shell" id="experience">
+  <div class="kicker" data-reveal><b>03 / Experience</b><i></i><span>Where the work happens</span></div>
+  <div class="section-head"><h2 class="h-display" data-reveal>One team.<br><em>Many systems.</em></h2></div>
+  <div class="xp">
+    <aside class="xp-card" data-reveal>
+      <div class="xp-logo">A</div>
+      <h3>Accellor Software</h3>
+      <p class="xp-role">Software Engineer · Data &amp; AI</p>
+      <dl class="xp-facts">
+        <div><dt>Since</dt><dd>July 2024</dd></div>
+        <div><dt>Location</dt><dd>Hyderabad, India</dd></div>
+        <div><dt>Focus</dt><dd>Agentic AI · RAG · ML</dd></div>
+        <div><dt>Clouds</dt><dd>Azure · AWS</dd></div>
+      </dl>
+      <div class="xp-tenure"><b data-count="9" data-suffix="+">9+</b><span class="label">AI systems delivered</span></div>
+      <p>Enterprise AI solutions end to end: from architecture and agent design to retrieval quality, evaluation, security and deployment.</p>
+    </aside>
+    <ol class="xp-list">
+      <li class="xp-item" data-reveal><div class="label"><b>Agentic RAG</b> · networking &amp; security enterprise</div><h4><a href="/work/enterprise-agentic-rag/">Enterprise Agentic RAG <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.985 4L12 10.77h-1.069V6.607l.015-.8L4.742 12 4 11.244l6.204-6.207-.727.015H5.217V4z"/></svg></a></h4><p>Multi-agent orchestration for intent classification, semantic retrieval, contextual reasoning and report generation with references and media, on a scalable Azure AI ecosystem with automated indexing and feedback loops.</p><div class="xp-stats"><span>17K+ documents</span><span>PDF / PPT exports</span></div></li>
+      <li class="xp-item" data-reveal><div class="label"><b>Proposal automation</b> · LangGraph</div><h4><a href="/work/smartrfp/">SmartRFP <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.985 4L12 10.77h-1.069V6.607l.015-.8L4.742 12 4 11.244l6.204-6.207-.727.015H5.217V4z"/></svg></a></h4><p>Two-phase agentic pipeline that extracts RFP requirements, interviews the bid manager, proves compliance with hybrid retrieval and drafts the proposal.</p></li>
+      <li class="xp-item" data-reveal><div class="label"><b>Document → deck</b> · Claude + PptxGenJS</div><h4><a href="/work/deckbuilder/">DeckBuilder <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.985 4L12 10.77h-1.069V6.607l.015-.8L4.742 12 4 11.244l6.204-6.207-.727.015H5.217V4z"/></svg></a></h4><p>Evidence-cited outlines, slides written as code, OOXML template merge and vision QA, plus a live editor for the real .pptx.</p><div class="xp-stats"><span>69 s → 11 s analysis</span></div></li>
+      <li class="xp-item" data-reveal><div class="label"><b>Team lead</b> · ML + agents</div><h4><a href="/work/fieldpulse-ai/">FieldPulse AI <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.985 4L12 10.77h-1.069V6.607l.015-.8L4.742 12 4 11.244l6.204-6.207-.727.015H5.217V4z"/></svg></a></h4><p>Led a four-person team building explainable churn scoring, a next-best-action engine and governed generative agents for field sales.</p><div class="xp-stats"><span>0.849 ROC-AUC</span><span>541 backend tests</span></div></li>
+      <li class="xp-item" data-reveal><div class="label"><b>Architecture</b> · AWS serverless</div><h4><a href="/work/claimpilot/">ClaimPilot <svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.985 4L12 10.77h-1.069V6.607l.015-.8L4.742 12 4 11.244l6.204-6.207-.727.015H5.217V4z"/></svg></a></h4><p>Designed a LangGraph-orchestrated, checkpointed multi-agent platform for insurance claims intake, with durable human-in-the-loop review.</p></li>
+      <li class="xp-item" data-reveal><div class="label"><b>Natural-language data</b></div><h4>Text-to-SQL applications</h4><p>Modular SQL generation templates, agent-written result summaries and D3.js charts whose type is chosen from the result, secured with role-based access, query logging and token auth.</p></li>
+      <li class="xp-item" data-reveal><div class="label"><b>Quality engineering</b></div><h4>AI test-case generation</h4><p>Extracts requirements from BRDs, Jira epics and Figma designs and generates exportable, cloud-integrated test suites.</p><div class="xp-stats"><span>98% coverage</span><span>85% time saved</span><span>3× release velocity</span></div></li>
+      <li class="xp-item" data-reveal><div class="label"><b>Vision-language models</b></div><h4>Medical imaging assistant</h4><p>Fine-tuned LLaMA 3.2 11B Vision Instruct on X-ray, CT, PET-CT, ultrasound and MRI data, with multi-agent cross-validation of findings to support radiologists.</p></li>
+      <li class="xp-item" data-reveal><div class="label"><b>Agentic mesh</b></div><h4>Autonomous travel planner</h4><p>Memory-enabled agents with custom toolkits for flights, hotels, weather and route optimisation that plan itineraries collaboratively.</p></li>
+    </ol>
+  </div>
 </section>
-<section id="about" class="about section-shell">
- <div class="section-kicker reveal"><span class="kicker-index">03 / THE ENGINEER</span><span class="kicker-line"></span><span class="kicker-right">CURIOUS BY DEFAULT</span></div>
- <div class="about-grid"><div class="about-title reveal"><span class="big-index">AR<span>.</span></span><h2>Bridging the<br><em>possible</em> and<br>the practical.</h2></div><div class="about-body reveal"><p class="about-lede">I like the space where a hard technical problem meets a real human need.</p><p>My work spans retrieval systems, language-model applications, data platforms, analytics, and agents that use tools to get things done. I care about what happens outside the model too: orchestration, access control, useful interfaces, measurable outcomes, and the details that make a prototype hold up in production.</p><div class="principles"><div><span>01</span><strong>Systems thinking</strong><small>Design the flow, not just the prompt.</small></div><div><span>02</span><strong>Grounded intelligence</strong><small>Context, evidence, and clear outputs.</small></div><div><span>03</span><strong>Useful outcomes</strong><small>Build for the people using it.</small></div></div></div></div>
- <div class="skills-panel reveal"><div class="skills-heading"><span class="mono">TOOLKIT / CURRENT STACK</span><span class="mono">01—06</span></div><div class="skill-row"><span class="skill-category">AI / ML</span><div class="skill-chips"><span>LLMs & VLMs</span><span>Agentic AI</span><span>LangChain</span><span>Agno AGI</span><span>CrewAI</span><span>Hugging Face</span><span>Prompt Engineering</span><span>Scikit-learn</span></div></div><div class="skill-row"><span class="skill-category">DATA</span><div class="skill-chips"><span>Python</span><span>Pandas</span><span>NumPy</span><span>SQL</span><span>Microsoft Fabric</span><span>Snowflake</span></div></div><div class="skill-row"><span class="skill-category">PLATFORMS</span><div class="skill-chips"><span>Azure</span><span>AWS</span><span>Azure OpenAI</span><span>Blob Storage</span><span>Logic Apps</span></div></div><div class="skill-row"><span class="skill-category">DATABASES</span><div class="skill-chips"><span>PostgreSQL</span><span>MySQL</span><span>SSMS</span><span>PGVector</span><span>Pinecone</span><span>FAISS</span><span>ChromaDB</span></div></div><div class="skill-row"><span class="skill-category">VISUALIZATION</span><div class="skill-chips"><span>Power BI</span><span>Tableau</span><span>Looker Studio</span><span>D3.js</span><span>Matplotlib</span><span>Seaborn</span></div></div></div>
+
+<!-- ABOUT -->
+<section class="section shell" id="about">
+  <div class="kicker" data-reveal><b>04 / About</b><i></i><span>Curious by default</span></div>
+  <div class="about-grid">
+    <div class="portrait" data-reveal>
+      <svg class="portrait-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring-path" d="M100,100 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs><text><textPath href="#ring-path" textLength="575" lengthAdjust="spacing">AI engineer • obsessed with the details • from prototype to production • </textPath></text></svg>
+      <div class="portrait-orbit" aria-hidden="true"></div>
+      <div class="portrait-photo"><img src="/assets/akshay.jpg" alt="Portrait of Akshay Ravella" width="660" height="660" loading="lazy"></div>
+      <div class="portrait-badge"><i class="live-dot"></i> Building at Accellor</div>
+    </div>
+    <div class="about-copy">
+      <h2 class="h-display" data-reveal>Bridging the <em>possible</em> and the practical.</h2>
+      <p class="about-lede" data-reveal>I’m Akshay, a Data &amp; AI engineer who likes the space where a hard technical problem meets a real human need.</p>
+      <p data-reveal>My work spans retrieval systems, LLM applications, agents that use tools to get things done, and the data platforms underneath. I care just as much about what happens outside the model: orchestration, access control, evaluation, useful interfaces and the details that let a prototype hold up in production.</p>
+      <div class="principles" data-reveal>
+        <div><span>01</span><strong>Systems thinking</strong><small>Design the flow, not just the prompt.</small></div>
+        <div><span>02</span><strong>Grounded intelligence</strong><small>Context, evidence and clear outputs.</small></div>
+        <div><span>03</span><strong>Useful outcomes</strong><small>Build for the people using it.</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toolkit surface" data-reveal>
+    <div class="toolkit-head"><span class="label">Toolkit / current stack</span><span class="label">01—07</span></div>
+    <div class="tk-row"><span class="label">AI / agents</span><div class="tk-chips"><span class="tag">LLMs &amp; VLMs</span><span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">Agno</span><span class="tag">CrewAI</span><span class="tag">MCP</span><span class="tag">Azure OpenAI</span><span class="tag">Claude</span><span class="tag">Bedrock</span><span class="tag">Hugging Face</span><span class="tag">Langfuse</span><span class="tag">RAGAS</span></div></div>
+    <div class="tk-row"><span class="label">ML</span><div class="tk-chips"><span class="tag">XGBoost</span><span class="tag">scikit-learn</span><span class="tag">sentence-transformers</span><span class="tag">Evidently</span><span class="tag">Fine-tuning</span></div></div>
+    <div class="tk-row"><span class="label">Engineering</span><div class="tk-chips"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQL</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Node.js</span></div></div>
+    <div class="tk-row"><span class="label">DevOps / CI-CD</span><div class="tk-chips"><span class="tag">Docker &amp; containerization</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD pipelines</span><span class="tag">Authentication · OAuth 2.0 / JWT / Entra ID</span><span class="tag">Authorization · RBAC</span></div></div>
+    <div class="tk-row"><span class="label">Data &amp; storage</span><div class="tk-chips"><span class="tag">PostgreSQL</span><span class="tag">pgvector</span><span class="tag">Redis</span><span class="tag">DynamoDB</span><span class="tag">Blob Storage</span><span class="tag">S3</span><span class="tag">Microsoft Fabric</span><span class="tag">Snowflake</span></div></div>
+    <div class="tk-row"><span class="label">Cloud</span><div class="tk-chips"><span class="tag">Microsoft Azure</span><span class="tag">AWS</span></div></div>
+    <div class="tk-row"><span class="label">Visualisation</span><div class="tk-chips"><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Looker Studio</span><span class="tag">D3.js</span><span class="tag">Recharts</span></div></div>
+  </div>
+
+  <div class="creds">
+    <div class="surface" data-reveal>
+      <span class="label head">Education</span>
+      <div class="edu-item"><span class="label">2024</span><div><strong>B.Tech, Electronics &amp; Communication Engineering</strong><small>DVR &amp; Dr. HS MIC College of Technology</small></div><b>8.91<small>CGPA</small></b></div>
+      <div class="edu-item"><span class="label">2020</span><div><strong>Intermediate Education</strong><small>Capital Merits Junior College</small></div><b>9.82<small>CGPA</small></b></div>
+      <div class="edu-item"><span class="label">2018</span><div><strong>Secondary School Certificate</strong><small>St. Paul's High School</small></div><b>10.0<small>CGPA</small></b></div>
+    </div>
+    <div class="surface" data-reveal>
+      <span class="label head">Certifications</span>
+      <div class="cert"><span>✳</span><p style="margin:0">Microsoft Certified: Power BI Data Analyst Associate</p></div>
+      <div class="cert"><span>✳</span><p style="margin:0">SnowPro Associate: Platform Certification</p></div>
+      <div class="cert"><span>✳</span><p style="margin:0">Google Data Analytics Professional Certificate<small>Coursera</small></p></div>
+      <div class="cert"><span>✳</span><p style="margin:0">Machine Learning: Basic to Advanced<small>Udemy</small></p></div>
+      <div class="cert"><span>✳</span><p style="margin:0">SQL Gold Badge<small>HackerRank</small></p></div>
+    </div>
+  </div>
 </section>
-<section id="experience" class="experience section-shell">
- <div class="section-kicker reveal"><span class="kicker-index">04 / EXPERIENCE</span><span class="kicker-line"></span><span class="kicker-right">THE PATH SO FAR</span></div>
- <div class="experience-head reveal"><h2>Built through<br><em>doing.</em></h2><p>Each role added another layer: data quality, analytics, cloud foundations, and now applied AI systems.</p></div>
- <div class="timeline">
-  <article class="timeline-entry reveal"><div class="timeline-date mono">JUL 2024 — PRESENT</div><div class="timeline-marker"><i></i></div><div class="timeline-detail"><div class="timeline-org">ACCELLOR SOFTWARE PVT. LTD. <span>HYDERABAD, INDIA</span></div><h3>Software Engineer <em>/ Data & AI</em></h3><p>Delivering enterprise AI solutions including Agentic RAG, Text-to-SQL applications, AI-driven test generation, vision-language model fine-tuning, and autonomous travel planning agents.</p><div class="timeline-tags"><span>Enterprise AI</span><span>Azure</span><span>LLM Systems</span><span>Data Products</span></div></div></article>
-  <article class="timeline-entry reveal"><div class="timeline-date mono">OCT 2023 — MAY 2024</div><div class="timeline-marker"><i></i></div><div class="timeline-detail"><div class="timeline-org">TELUS INTERNATIONAL AI DATA SOLUTIONS <span>REMOTE</span></div><h3>Data Analyst <em>/ Freelance</em></h3><p>Supported data process optimization, data-quality evaluation, rigorous quality control, research analysis, and customer AI/ML model improvement.</p><div class="timeline-tags"><span>Data Quality</span><span>Research</span><span>AI/ML</span></div></div></article>
-  <article class="timeline-entry reveal"><div class="timeline-date mono">MAY 2023 — NOV 2023</div><div class="timeline-marker"><i></i></div><div class="timeline-detail"><div class="timeline-org">ALL INDIA COUNCIL FOR TECHNICAL EDUCATION <span>REMOTE</span></div><h3>Data Analytics & ML Intern</h3><p>Applied regression, classification, and clustering; built cloud analytics workflows using Amazon Redshift, Athena, S3, AWS Glue, and SQL.</p><div class="timeline-tags"><span>Machine Learning</span><span>AWS</span><span>Analytics</span></div></div></article>
- </div>
-</section>
-<section class="education section-shell">
- <div class="section-kicker reveal"><span class="kicker-index">05 / FOUNDATIONS</span><span class="kicker-line"></span><span class="kicker-right">EDUCATION & CREDENTIALS</span></div>
- <div class="education-grid"><div class="education-main reveal"><h2>Grounded in<br><em>engineering.</em></h2><div class="education-item"><span class="mono">2024</span><div><strong>B.Tech — Electronics & Communication Engineering</strong><small>DVR & Dr. HS MIC College of Technology</small></div><b>8.91 <small>CGPA</small></b></div><div class="education-item"><span class="mono">2020</span><div><strong>Intermediate Education</strong><small>Capital Merits Junior College</small></div><b>9.82 <small>CGPA</small></b></div><div class="education-item"><span class="mono">2018</span><div><strong>Secondary School Certificate</strong><small>St. Paul's High School</small></div><b>10.0 <small>CGPA</small></b></div></div><div class="cert-panel reveal"><span class="mono cert-label">CERTIFICATIONS / BADGES</span><div class="cert-item"><span>✳</span><p>Google Data Analytics Professional Certificate <small>Coursera</small></p></div><div class="cert-item"><span>✳</span><p>Microsoft Certified: Power BI Data Analyst Associate</p></div><div class="cert-item"><span>✳</span><p>SnowPro Associate: Platform Certification</p></div><div class="cert-item"><span>✳</span><p>Machine Learning — Basic to Advanced <small>Udemy</small></p></div><div class="cert-item"><span>✳</span><p>SQL Gold Badge Holder <small>HackerRank</small></p></div><div class="cert-item"><span>✳</span><p>TCS iON Career Edge Young Professional</p></div></div></div>
-</section>
-<section id="contact" class="contact section-shell">
- <div class="contact-bg-word" aria-hidden="true">LET'S BUILD</div><div class="section-kicker reveal"><span class="kicker-index">06 / NEXT CHAPTER</span><span class="kicker-line"></span><span class="kicker-right">OPEN TO GREAT PROBLEMS</span></div>
- <div class="contact-content reveal"><span class="contact-eyebrow mono"><i class="live-dot"></i> HAVE A CHALLENGE WORTH SOLVING?</span><h2>Let's make<br>something <em>matter.</em></h2><p>Building an AI product, rethinking a data workflow, or exploring an ambitious idea? I'd love to hear about it.</p><a class="contact-email" href="mailto:akshayravella@gmail.com">akshayravella@gmail.com <span>↗</span></a><div class="contact-links"><a href="https://www.linkedin.com/in/akshayravella" target="_blank" rel="noreferrer">LINKEDIN <span>↗</span></a><a href="https://github.com/AkshayRavella" target="_blank" rel="noreferrer">GITHUB <span>↗</span></a><a href="tel:+918919081063">+91 89190 81063</a></div></div>
- <footer class="footer"><a class="brand" href="#top"><span class="brand-mark">AR<span>↗</span></span><span class="brand-name">AKSHAY RAVELLA</span></a><span class="mono">DESIGNED TO KEEP EVOLVING · 2026</span><a href="#top" class="back-top">BACK TO TOP ↑</a></footer>
+
+<!-- CONTACT -->
+<section class="section shell contact" id="contact">
+  <div class="contact-word" aria-hidden="true">LET'S BUILD</div>
+  <div class="kicker" data-reveal><b>05 / Next chapter</b><i></i><span>Open to great problems</span></div>
+  <div class="contact-body" data-reveal>
+    <span class="label"><i class="live-dot"></i> Have a challenge worth solving?</span>
+    <h2>Let's make<br>something <em>matter.</em></h2>
+    <p>Building an AI product, rethinking a data workflow or exploring an ambitious idea? I'd love to hear about it.</p>
+    <a class="contact-email" href="mailto:akshayravella@gmail.com">akshayravella@gmail.com <span>↗</span></a>
+    <div class="contact-links"><a class="btn btn-social" href="https://www.linkedin.com/in/akshay-ravella/" target="_blank" rel="noopener noreferrer"><svg class="s-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.064 2.064 0 1 1 0-4.128 2.064 2.064 0 0 1 0 4.128zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn <span>↗</span></a><a class="btn btn-social" href="https://github.com/AkshayRavella" target="_blank" rel="noopener noreferrer"><svg class="s-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub <span>↗</span></a><a class="btn btn-social" href="mailto:akshayravella@gmail.com"><svg class="s-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>Gmail <span>↗</span></a><a class="btn btn-social" href="tel:+918919081063"><svg class="s-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+91 89190 81063</a></div>
+  </div>
+  <footer class="footer"><a class="brand" href="/"><span class="brand-mark">AR<span>↗</span></span><span class="brand-name">AKSHAY RAVELLA</span></a><span class="label footer-time">Hyderabad, IN · <span data-local-time>IST</span></span><a class="label" href="#top">Back to top ↑</a></footer>
 </section>
 </main>
-<script src="/app.js"></script>
+
+<script src="/js/data.js?v=2026111104"></script>
+<script src="/js/visuals.js?v=2026111104"></script>
+<script src="/js/main.js?v=2026111104"></script>
+<script src="/js/home.js?v=2026111104"></script>
+<script src="/js/fluid.js?v=2026111104"></script>
 </body>
 </html>
