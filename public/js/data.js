@@ -53,15 +53,28 @@ window.PROJECTS = [
       ]
     },
     flow: {
-      title: 'Presentation pipeline, step by step',
-      steps: [
-        ['Choose the audience', 'Persona (executive, cross-functional or expert), slide count and light/dark theme.'],
-        ['Plan the story', 'A planning agent sets the big idea, the outline and a slide-by-slide narrative.'],
-        ['Write the slides as code', 'The code model receives the content, references and a design skill, and writes a full PptxGenJS script.'],
-        ['Build & render', 'Node builds the PPTX, which is rendered to PDF and then to per-slide images.'],
-        ['Inspect visually', 'A vision model checks every slide for overflow, overlap and layout defects.'],
-        ['Auto-fix', 'The script and the issue list go back to the model and the build re-runs.'],
-        ['Merge & validate', 'Slides are merged into the brand template, schema-validated as OOXML and queued for human review.']
+      title: 'Three capabilities, one evidence base',
+      foundation: 'Documents are synced from the document portal on every change, chunked, embedded and indexed in pgvector. Reports, search and decks all draw on that one evidence base.',
+      tabs: [
+        { name: 'Research reports', title: 'From a question to a cited report', steps: [
+          ['Ask', 'A question, optionally with uploads and a choice of sources.'],
+          ['Retrieve', 'Hybrid search across the document portal, analyst research and uploads.'],
+          ['Reason', 'An agent analyses the evidence, calling tools where it needs more.'],
+          ['Report', 'A structured report with page-level citations and suggested follow-ups.']
+        ] },
+        { name: 'Intelligent search', title: 'Live search across every source', steps: [
+          ['Query', 'Typed into a live WebSocket search channel.'],
+          ['Understand', 'Search intent is extracted from the query.'],
+          ['Find', 'Vector, keyword and metadata filters combined, then re-ranked and de-duplicated.'],
+          ['Stream', 'Results arrive as they are ranked, with file previews.']
+        ] },
+        { name: 'Deck builder', title: 'From findings to an executive deck', steps: [
+          ['Choose the audience', 'Persona, slide count and light or dark theme.'],
+          ['Plan the story', 'A planning agent sets the big idea and a slide-by-slide outline.'],
+          ['Write slides as code', 'The model writes a full PptxGenJS script from the content and references.'],
+          ['Render & self-check', 'Every slide is rendered and inspected by a vision model; defects are auto-fixed.'],
+          ['Brand & review', 'Merged into the brand template and reviewed before it reaches an executive.']
+        ] }
       ]
     },
     features: [

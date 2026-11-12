@@ -36,6 +36,15 @@
     </figure>`;
   };
 
+  // Several flows in one project (e.g. reports / search / decks) render as tabs over a shared foundation.
+  const flowTabs = f => `
+    ${f.foundation ? `<p class="flow-base" data-reveal><span class="label">Shared foundation</span><span>${f.foundation}</span></p>` : ''}
+    <div class="flow-tabs" role="tablist" aria-label="Flows" data-reveal>${f.tabs.map((t, i) => `<button type="button" role="tab" id="flow-t${i}" aria-controls="flow-p${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" class="flow-tab${i === 0 ? ' is-active' : ''}"><span class="label">${pad(i + 1)}</span>${t.name}</button>`).join('')}</div>
+    ${f.tabs.map((t, i) => `<div class="flow-panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="flow-p${i}" aria-labelledby="flow-t${i}"${i ? ' hidden' : ''}>
+      <p class="flow-sub">${t.title}</p>
+      <ol class="flow">${t.steps.map(([h, d], k) => `<li class="flow-step" style="--i:${k}"><span class="flow-n">${pad(k + 1)}</span><div><strong>${h}</strong><p>${d}</p></div></li>`).join('')}</ol>
+    </div>`).join('')}`;
+
   document.title = `${p.name} — Akshay Ravella`;
   main.innerHTML = `
   <section class="cs-hero shell">
@@ -94,7 +103,7 @@
       <section id="flow" class="cs-sec">
         ${head('flow', n('flow'), 'How it works')}
         <h3 class="cs-h3" data-reveal>${p.flow.title}</h3>
-        <ol class="flow">${p.flow.steps.map(([t, d], i) => `<li class="flow-step" data-reveal><span class="flow-n">${pad(i + 1)}</span><div><strong>${t}</strong><p>${d}</p></div></li>`).join('')}</ol>
+        ${p.flow.tabs ? flowTabs(p.flow) : `<ol class="flow">${p.flow.steps.map(([t, d], i) => `<li class="flow-step" data-reveal><span class="flow-n">${pad(i + 1)}</span><div><strong>${t}</strong><p>${d}</p></div></li>`).join('')}</ol>`}
       </section>
 
       ${p.chart ? `<section id="signals" class="cs-sec">${head('signals', n('signals'), 'The model')}${chart(p.chart)}</section>` : ''}
@@ -134,10 +143,26 @@
       links.forEach((a, i) => a.classList.toggle('is-current', i === active));
     });
     // Flow line fills as you read.
+    const tabs = [...document.querySelectorAll('.flow-tab')];
+    const panels = [...document.querySelectorAll('.flow-panel')];
+    const select = i => {
+      tabs.forEach((t, k) => { t.classList.toggle('is-active', k === i); t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+      panels.forEach((pn, k) => { pn.classList.toggle('is-active', k === i); pn.hidden = k !== i; });
+      dispatchEvent(new Event('scroll'));
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i));
+      t.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const j = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        select(j); tabs[j].focus();
+      });
+    });
     const flow = document.querySelector('.flow');
     if (flow) {
-      const steps = [...flow.children];
       window.AR.onScroll(() => {
+        const flow = document.querySelector('.flow-panel.is-active .flow') || document.querySelector('.flow');
+        const steps = [...flow.children];
         const r = flow.getBoundingClientRect(), mark = innerHeight * 0.6;
         flow.style.setProperty('--fp', Math.min(Math.max((mark - r.top) / r.height, 0), 1).toFixed(4));
         steps.forEach(s => s.classList.toggle('is-lit', s.getBoundingClientRect().top < mark));
