@@ -14,7 +14,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/main.css?v=2026111104">
+<link rel="stylesheet" href="/css/main.css?v=2026111817">
+<!-- deferred + render-blocking: the page is built by these scripts, so the first frame (and the page-to-page view transition) waits for them -->
+<script src="/js/data.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/visuals.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/main.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/home.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/attention.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/toolkit.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/fluid.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/fx.js?v=2026111817" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -62,20 +71,20 @@
   <div class="hero-foot label" data-reveal><span class="scroll-cue"><i></i> Scroll to explore</span><span>Open to building what's next</span></div>
 </section>
 
-<section class="signals" aria-label="Selected impact">
-  <div class="signal" data-reveal><span class="signal-num" data-count="17" data-suffix="K+">17K+</span><span class="label">Documents grounded in RAG</span></div>
-  <div class="signal" data-reveal><span class="signal-num" data-count="0.849" data-decimals="3">0.849</span><span class="label">ROC-AUC, priority model</span></div>
-  <div class="signal" data-reveal><span class="signal-num" data-count="6" data-suffix="×">6×</span><span class="label">Faster doc analysis (69→11 s)</span></div>
-  <div class="signal" data-reveal><span class="signal-num" data-count="98" data-suffix="%">98%</span><span class="label">Coverage, AI test generation</span></div>
-</section>
-
-<!-- POINT OF VIEW -->
+<!-- POINT OF VIEW: the headline is read like an attention map when it lands (js/attention.js) -->
 <section class="section shell" id="manifesto">
   <div class="kicker" data-reveal><b>01 / Point of view</b><i></i><span>Beyond the demo</span></div>
   <div class="manifesto-grid">
-    <h2 class="h-display" data-reveal>Not AI for the headline. <span>AI for the hard problem.</span></h2>
-    <div class="manifesto-copy" data-reveal><span class="asterisk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span><p>I work where applied AI, system design and product thinking meet. I build systems that retrieve the right context, reason over it, respect permissions and show their evidence. Then I do the unglamorous work that makes them survive contact with real users.</p><span class="label">The principle: make complexity useful.</span></div>
+    <h2 class="h-display at-head">Not AI for the headline. <span>AI for the hard problem.</span></h2>
+    <div class="manifesto-copy at-after"><span class="asterisk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span><p>I work where applied AI, system design and product thinking meet. I build systems that retrieve the right context, reason over it, respect permissions and show their evidence. Then I do the unglamorous work that makes them survive contact with real users.</p><span class="label">The principle: make complexity useful.</span></div>
   </div>
+</section>
+
+<section class="signals" aria-label="Selected impact">
+  <div class="signal" data-reveal data-spark="docs"><span class="signal-num" data-count="17" data-suffix="K+">17K+</span><span class="label">Documents grounded in RAG</span></div>
+  <div class="signal" data-reveal data-spark="roc"><span class="signal-num" data-count="0.849" data-decimals="3">0.849</span><span class="label">ROC-AUC, priority model</span></div>
+  <div class="signal" data-reveal data-spark="speed"><span class="signal-num" data-count="6" data-suffix="×">6×</span><span class="label">Faster doc analysis (69→11 s)</span></div>
+  <div class="signal" data-reveal data-spark="ring"><span class="signal-num" data-count="98" data-suffix="%">98%</span><span class="label">Coverage, AI test generation</span></div>
 </section>
 
 <!-- SELECTED WORK -->
@@ -136,25 +145,53 @@
     </div>
   </div>
 
-  <div class="toolkit surface" data-reveal>
-    <div class="toolkit-head"><span class="label">Toolkit / current stack</span><span class="label">01—07</span></div>
-    <div class="tk-row"><span class="label">AI / agents</span><div class="tk-chips"><span class="tag">LLMs &amp; VLMs</span><span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">Agno</span><span class="tag">CrewAI</span><span class="tag">MCP</span><span class="tag">Azure OpenAI</span><span class="tag">Claude</span><span class="tag">Bedrock</span><span class="tag">Hugging Face</span><span class="tag">Langfuse</span><span class="tag">RAGAS</span></div></div>
-    <div class="tk-row"><span class="label">ML</span><div class="tk-chips"><span class="tag">XGBoost</span><span class="tag">scikit-learn</span><span class="tag">sentence-transformers</span><span class="tag">Evidently</span><span class="tag">Fine-tuning</span></div></div>
-    <div class="tk-row"><span class="label">Engineering</span><div class="tk-chips"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQL</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Node.js</span></div></div>
-    <div class="tk-row"><span class="label">DevOps / CI-CD</span><div class="tk-chips"><span class="tag">Docker &amp; containerization</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD pipelines</span><span class="tag">Authentication · OAuth 2.0 / JWT / Entra ID</span><span class="tag">Authorization · RBAC</span></div></div>
-    <div class="tk-row"><span class="label">Data &amp; storage</span><div class="tk-chips"><span class="tag">PostgreSQL</span><span class="tag">pgvector</span><span class="tag">Redis</span><span class="tag">DynamoDB</span><span class="tag">Blob Storage</span><span class="tag">S3</span><span class="tag">Microsoft Fabric</span><span class="tag">Snowflake</span></div></div>
-    <div class="tk-row"><span class="label">Cloud</span><div class="tk-chips"><span class="tag">Microsoft Azure</span><span class="tag">AWS</span></div></div>
-    <div class="tk-row"><span class="label">Visualisation</span><div class="tk-chips"><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Looker Studio</span><span class="tag">D3.js</span><span class="tag">Recharts</span></div></div>
+  <!-- Toolkit: a curved ribbon of cards, moved by scrolling or dragging (js/toolkit.js) -->
+  <div class="tk3" aria-label="Toolkit / current stack" role="region">
+    <div class="tk3-pin">
+      <div class="kicker tk3-head"><b>Toolkit / current stack</b><i></i><span><b data-tk-num>01</b> / 07 · scroll or drag</span></div>
+      <div class="tk3-view"><div class="tk3-track">
+      <article class="tk3-card" data-name="AI / agents">
+        <div class="tk3-bar"><i></i><i></i><i></i><span>agents.py</span><b>01 / 07</b></div>
+        <div class="tk3-body"><h3>AI / agents</h3><p>Agents that plan, call tools and cite their sources.</p><div class="tk-chips"><span class="tag">LLMs &amp; VLMs</span><span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">Agno</span><span class="tag">CrewAI</span><span class="tag">MCP</span><span class="tag">Azure OpenAI</span><span class="tag">Claude</span><span class="tag">Hugging Face</span><span class="tag">Langfuse</span><span class="tag">RAGAS</span><span class="tag">Embeddings</span><span class="tag">Vector databases</span><span class="tag">Fine-tuning</span></div></div>
+      </article>
+      <article class="tk3-card" data-name="ML">
+        <div class="tk3-bar"><i></i><i></i><i></i><span>model.ipynb</span><b>02 / 07</b></div>
+        <div class="tk3-body"><h3>ML</h3><p>Models that rank, predict and stay monitored.</p><div class="tk-chips"><span class="tag">Regression</span><span class="tag">Classification</span><span class="tag">Clustering</span><span class="tag">Feature engineering</span><span class="tag">Data processing</span><span class="tag">Model evaluation</span><span class="tag">XGBoost</span><span class="tag">scikit-learn</span><span class="tag">Evidently</span></div></div>
+      </article>
+      <article class="tk3-card" data-name="Engineering">
+        <div class="tk3-bar"><i></i><i></i><i></i><span>api.ts</span><b>03 / 07</b></div>
+        <div class="tk3-body"><h3>Engineering</h3><p>The APIs and interfaces around the model.</p><div class="tk-chips"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQL</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">REST APIs</span><span class="tag">WebSockets</span><span class="tag">System design</span></div></div>
+      </article>
+      <article class="tk3-card" data-name="DevOps / CI-CD">
+        <div class="tk3-bar"><i></i><i></i><i></i><span>deploy.yml</span><b>04 / 07</b></div>
+        <div class="tk3-body"><h3>DevOps / CI-CD</h3><p>Shipping it safely, again and again.</p><div class="tk-chips"><span class="tag">Docker &amp; containerization</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD pipelines</span><span class="tag">Monitoring &amp; logging</span><span class="tag">Authentication &amp; authorization</span></div></div>
+      </article>
+      <article class="tk3-card" data-name="Data &amp; storage">
+        <div class="tk3-bar"><i></i><i></i><i></i><span>schema.sql</span><b>05 / 07</b></div>
+        <div class="tk3-body"><h3>Data &amp; storage</h3><p>Where context, vectors and state live.</p><div class="tk-chips"><span class="tag">PostgreSQL</span><span class="tag">pgvector</span><span class="tag">Redis</span><span class="tag">DynamoDB</span><span class="tag">Object storage (Blob / S3)</span><span class="tag">Microsoft Fabric</span><span class="tag">Snowflake</span></div></div>
+      </article>
+      <article class="tk3-card" data-name="Cloud">
+        <div class="tk3-bar"><i></i><i></i><i></i><span>cloud.yaml</span><b>06 / 07</b></div>
+        <div class="tk3-body"><h3>Cloud</h3><p>Production on both major clouds.</p><div class="tk-chips"><span class="tag">Microsoft Azure</span><span class="tag">AWS</span></div></div>
+      </article>
+      <article class="tk3-card" data-name="Visualisation">
+        <div class="tk3-bar"><i></i><i></i><i></i><span>charts.jsx</span><b>07 / 07</b></div>
+        <div class="tk3-body"><h3>Visualisation</h3><p>Making the results readable.</p><div class="tk-chips"><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Looker Studio</span><span class="tag">D3.js</span><span class="tag">Recharts</span></div></div>
+      </article>
+      </div></div>
+    </div>
   </div>
 
+  <!-- Education + certifications: the two boxes fly in from the sides and collide into place (js/fx.js) -->
   <div class="creds">
-    <div class="surface" data-reveal>
+    <i class="cr-spark" aria-hidden="true"></i>
+    <div class="surface cr-box cr-l">
       <span class="label head">Education</span>
       <div class="edu-item"><span class="label">2024</span><div><strong>B.Tech, Electronics &amp; Communication Engineering</strong><small>DVR &amp; Dr. HS MIC College of Technology</small></div><b>8.91<small>CGPA</small></b></div>
       <div class="edu-item"><span class="label">2020</span><div><strong>Intermediate Education</strong><small>Capital Merits Junior College</small></div><b>9.82<small>CGPA</small></b></div>
       <div class="edu-item"><span class="label">2018</span><div><strong>Secondary School Certificate</strong><small>St. Paul's High School</small></div><b>10.0<small>CGPA</small></b></div>
     </div>
-    <div class="surface" data-reveal>
+    <div class="surface cr-box cr-r">
       <span class="label head">Certifications</span>
       <div class="cert"><span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span><p style="margin:0">Microsoft Certified: Power BI Data Analyst Associate</p></div>
       <div class="cert"><span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span><p style="margin:0">SnowPro Associate: Platform Certification</p></div>
@@ -180,10 +217,5 @@
 </section>
 </main>
 
-<script src="/js/data.js?v=2026111104"></script>
-<script src="/js/visuals.js?v=2026111104"></script>
-<script src="/js/main.js?v=2026111104"></script>
-<script src="/js/home.js?v=2026111104"></script>
-<script src="/js/fluid.js?v=2026111104"></script>
 </body>
 </html>
