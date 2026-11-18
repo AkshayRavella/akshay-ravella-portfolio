@@ -563,7 +563,7 @@ html { font-variant-emoji: text }
 
 .ww-shot {
   position: absolute; top: 50%; right: -22%; width: 124%; aspect-ratio: 16/11; max-height: 72vh;
-  padding: 1rem; border-radius: 1.75rem; background: var(--shot-bg); opacity: 0;
+  padding: 1rem; border-radius: 1.75rem; background: var(--shot-bg); opacity: 0; pointer-events: none;
   box-shadow: 0 2.125rem 5.625rem -2.125rem rgb(var(--ring-rgb) / .3);
   transform: translateY(calc(-50% + 3rem)) scale(.995); transition: opacity .25s var(--ease-w), transform .25s var(--ease-w);
 }
@@ -576,7 +576,7 @@ html { font-variant-emoji: text }
 }
 [data-theme="mono"] .ww-shot::before { background: linear-gradient(145deg, #fff 0%, rgba(255, 255, 255, .15) 32%, rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, .7) 100%) }
 .ww-shot.is-above { transform: translateY(calc(-50% - 3rem)) scale(.995) }
-.ww-shot.is-active { opacity: 1; transform: translateY(-50%) scale(1); transition: opacity .55s var(--ease-w) .125s, transform .55s var(--ease-w) .125s }
+.ww-shot.is-active { pointer-events: auto; opacity: 1; transform: translateY(-50%) scale(1); transition: opacity .55s var(--ease-w) .125s, transform .55s var(--ease-w) .125s }
 .ww-shot .viz { --bleed: 18%; border-radius: .875rem; height: 100% }
 .ww-shot a { position: absolute; inset: 0; border-radius: inherit; z-index: 3 }
 .ww-shot.is-active .viz { view-transition-name: var(--vt) }
@@ -1083,42 +1083,6 @@ html { font-variant-emoji: text }
 [data-theme="lavender"] :is(.hero-title, .h-display, .contact h2) em { background-image: linear-gradient(100deg, rgb(255 255 255 / 0) 0, rgb(255 255 255 / .9) .25em, #ffffff .6em, #ffffff 85%, rgb(255 255 255 / .7) 97%, rgb(255 255 255 / 0) 100%) }
 
 /* =========================================================================
-   PORTAL — hero → Point of view (js/portal.js)
-   The AI engine powers up, opens into a circular portal, and the manifesto streams in like an LLM answer.
-   Pinned only when the script switches it on (no JS / reduced motion = sections simply stack).
-   ========================================================================= */
-.portal { position: relative }
-.pt-stage { position: relative; isolation: isolate }
-.pt-ring { display: none }
-.portal.pt-live { height: calc(100vh - 76px + 170vh) }
-.pt-live .pt-stage { position: sticky; top: 76px; height: calc(100vh - 76px); overflow: hidden }
-.pt-live .pt-hole {
-  position: absolute; inset: 0; z-index: 5; display: flex; align-items: center;
-  background: var(--bg); clip-path: circle(0px at 50% 50%);
-}
-.pt-live .pt-hole > .section { width: 100%; padding-top: 0; padding-bottom: 0 }
-.pt-live .pt-ring {
-  display: block; position: absolute; z-index: 6; left: 0; top: 0; width: 0; height: 0; border-radius: 50%; pointer-events: none; opacity: 0;
-  border: 1.5px solid var(--accent); transform: translate(-50%, -50%);
-  box-shadow: 0 0 40px rgb(var(--accent-rgb) / .55), 0 0 120px rgb(var(--accent-rgb) / .25), inset 0 0 50px rgb(var(--accent-rgb) / .3);
-}
-/* streamed headline: characters keep their space, so the line never reflows while it writes */
-/* letters inherit their sentence colour (the manifesto styles colour every span in the headline grey) */
-.manifesto-grid .h-display .pt-ch { color: inherit }
-.pt-ch.is-off { visibility: hidden }
-.manifesto-grid .h-display .pt-ch.is-scr { position: relative; color: transparent }
-.pt-ch.is-scr::before { content: attr(data-g); position: absolute; left: 0; top: 0; color: var(--accent); opacity: .8 }
-.pt-ch.is-cur::after { content: ""; display: inline-block; width: .07em; height: .82em; margin-left: .03em; vertical-align: -.06em; background: var(--accent); animation: blink 1s steps(1) infinite }
-/* Phones: no pinning; the circle opens and the headline streams as Point of view scrolls in */
-@media (max-width: 991px) {
-  .portal.pt-live { height: auto }
-  .pt-live .pt-stage { position: relative; top: 0; height: auto; overflow: visible }
-  .pt-live .pt-hole { position: relative; inset: auto; background: transparent }
-  .pt-live .pt-hole > .section { padding-top: clamp(80px, 10vw, 130px); padding-bottom: 40px }
-  .pt-live .pt-ring { display: none }
-}
-
-/* =========================================================================
    TOOLKIT RIBBON (js/toolkit.js)
    Seven stack cards on a curved strip that bends harder the faster it moves.
    Default (no JS, reduced motion, phones): a swipeable strip. Desktop + JS: pinned, moved by scroll or drag.
@@ -1158,3 +1122,36 @@ html { font-variant-emoji: text }
   .tk-live .tk3-body .tag { font-size: 12px; padding: 9px 14px }
 }
 @media (max-width: 991px) { .tk3-hint { display: none } }
+
+/* =========================================================================
+   ATTENTION MAP — Point of view headline (js/attention.js)
+   On landing, the headline shows as tokens, attention arcs fire between related words,
+   then the tokens resolve into the sentence and "the hard problem" stays lit.
+   ========================================================================= */
+.at-head { position: relative }
+.at-w { display: inline-block; position: relative; transition: color .5s, opacity .5s, transform .6s cubic-bezier(.2, .8, .2, 1) }
+.at-w::before {
+  content: ""; position: absolute; inset: .02em -.12em -.02em; border: 1px solid rgb(var(--accent-rgb) / .45);
+  background: rgb(var(--accent-rgb) / .05); opacity: 0; transform: scale(.9); transition: opacity .35s, transform .45s cubic-bezier(.2, .8, .2, 1); pointer-events: none;
+}
+.at-w::after {
+  content: attr(data-t); position: absolute; left: -.12em; bottom: calc(100% + 4px); font: 9px var(--font-mono); letter-spacing: .06em;
+  color: var(--accent); opacity: 0; transition: opacity .3s; white-space: nowrap;
+}
+.manifesto-grid .h-display .at-w { color: inherit }
+.at-ready:not(.at-done) .h-display .at-w { color: var(--dim) }
+.at-ready .at-w { opacity: .35; transform: translateY(.18em) }
+.at-tok .at-w { opacity: 1; transform: none }
+.at-tok .at-w::before { opacity: 1; transform: none; transition-delay: var(--d, 0s) }
+.at-tok .at-w::after { opacity: .8; transition-delay: var(--d, 0s) }
+.at-tok:not(.at-done) .h-display .at-w.is-hot { color: var(--ink) }
+.at-tok .at-w.is-hot::before { border-color: var(--accent); background: rgb(var(--accent-rgb) / .14) }
+.at-done .at-w::before, .at-done .at-w::after { opacity: 0; transform: scale(1.06); transition-delay: 0s }
+.at-done .at-w { opacity: 1; transform: none }
+.at-done .h-display .at-w.at-lit { color: var(--accent) }
+.at-arcs { position: absolute; inset: 0; overflow: visible; pointer-events: none; z-index: 2 }
+.at-arcs path { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; filter: drop-shadow(0 0 6px rgb(var(--accent-rgb) / .7)); transition: opacity .5s }
+.at-arcs circle { fill: var(--accent); transition: opacity .5s }
+.at-done .at-arcs path, .at-done .at-arcs circle { opacity: 0 }
+.at-after { transition: opacity .45s .1s, transform .5s .1s cubic-bezier(.2, .8, .2, 1) }
+.at-wait .at-after { opacity: 0; transform: translateY(18px) }

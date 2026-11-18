@@ -14,7 +14,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/main.css?v=2026111709">
+<link rel="stylesheet" href="/css/main.css?v=2026111803">
+<!-- deferred + render-blocking: the page is built by these scripts, so the first frame (and the page-to-page view transition) waits for them -->
+<script src="/js/data.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/visuals.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/main.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/home.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/attention.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/toolkit.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/fluid.js?v=2026111803" defer blocking="render"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -32,9 +40,7 @@
 </header>
 
 <main id="main">
-<!-- HERO → POINT OF VIEW: the AI engine opens into a portal and the answer streams in (js/portal.js) -->
-<section class="portal" aria-label="Introduction">
-<div class="pt-stage">
+<!-- HERO -->
 <section class="hero shell" id="top">
   <canvas class="hero-fluid" aria-hidden="true"></canvas>
   <div class="hero-top" data-reveal><span class="label"><i class="live-dot"></i> AI Engineer · Hyderabad, India</span><span class="label" style="white-space:nowrap">Portfolio / <span data-year>2026</span></span></div>
@@ -63,17 +69,14 @@
   </div>
   <div class="hero-foot label" data-reveal><span class="scroll-cue"><i></i> Scroll to explore</span><span>Open to building what's next</span></div>
 </section>
-<div class="pt-ring" aria-hidden="true"></div>
-<div class="pt-hole">
+
+<!-- POINT OF VIEW: the headline is read like an attention map when it lands (js/attention.js) -->
 <section class="section shell" id="manifesto">
-  <div class="kicker pt-fade"><b>01 / Point of view</b><i></i><span>Beyond the demo</span></div>
+  <div class="kicker" data-reveal><b>01 / Point of view</b><i></i><span>Beyond the demo</span></div>
   <div class="manifesto-grid">
-    <h2 class="h-display pt-stream">Not AI for the headline. <span>AI for the hard problem.</span></h2>
-    <div class="manifesto-copy pt-fade"><span class="asterisk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span><p>I work where applied AI, system design and product thinking meet. I build systems that retrieve the right context, reason over it, respect permissions and show their evidence. Then I do the unglamorous work that makes them survive contact with real users.</p><span class="label">The principle: make complexity useful.</span></div>
+    <h2 class="h-display at-head">Not AI for the headline. <span>AI for the hard problem.</span></h2>
+    <div class="manifesto-copy at-after"><span class="asterisk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span><p>I work where applied AI, system design and product thinking meet. I build systems that retrieve the right context, reason over it, respect permissions and show their evidence. Then I do the unglamorous work that makes them survive contact with real users.</p><span class="label">The principle: make complexity useful.</span></div>
   </div>
-</section>
-</div>
-</div>
 </section>
 
 <section class="signals" aria-label="Selected impact">
@@ -211,12 +214,5 @@
 </section>
 </main>
 
-<script src="/js/data.js?v=2026111704"></script>
-<script src="/js/visuals.js?v=2026111704"></script>
-<script src="/js/main.js?v=2026111704"></script>
-<script src="/js/home.js?v=2026111704"></script>
-<script src="/js/portal.js?v=2026111704"></script>
-<script src="/js/toolkit.js?v=2026111707"></script>
-<script src="/js/fluid.js?v=2026111704"></script>
 </body>
 </html>
