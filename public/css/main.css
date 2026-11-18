@@ -1241,4 +1241,4 @@ html { font-variant-emoji: text }
 @keyframes ns-in { from { opacity: 0; transform: translateY(6px); filter: blur(3px) } }
 @media (max-width: 1180px) { .nav-sec { display: none } }
 /* cursor path (js/fx.js) */
-.cur-canvas { position: fixed; inset: 0; z-index: 999; width: 100vw; height: 100vh; pointer-events: none }
+.cur-canvas { position: fixed; inset: 0; z-index: 999; width: 100vw; height: 100vh; pointer-events: none; filter: blur(2px) }
