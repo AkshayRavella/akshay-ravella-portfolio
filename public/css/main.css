@@ -640,7 +640,7 @@ html { font-variant-emoji: text }
 
 .tk-chips { display: flex; flex-wrap: wrap; gap: 7px }
 
-.creds { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; margin-top: 24px }
+.creds { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; margin-top: 24px }
 .creds > div { padding: 26px 28px }
 .edu-item { display: grid; grid-template-columns: 54px 1fr auto; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: start }
 .edu-item:last-child { border: 0; padding-bottom: 0 }
@@ -652,6 +652,35 @@ html { font-variant-emoji: text }
 .cert:last-child { border: 0; padding-bottom: 0 }
 .cert span { color: var(--accent) } .cert small { display: block; color: var(--dim); font-size: 12px }
 .creds .label.head { display: block; color: var(--accent); padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 4px }
+/* collision entrance: the boxes fly in from either side, hit in the middle, bounce and settle */
+.cr-wait .cr-l { opacity: 0; transform: translateX(-60vw) rotate(-5deg) }
+.cr-wait .cr-r { opacity: 0; transform: translateX(60vw) rotate(5deg) }
+.cr-hit .cr-l { animation: cr-in-l 1.15s cubic-bezier(.3, .1, .3, 1) both }
+.cr-hit .cr-r { animation: cr-in-r 1.15s cubic-bezier(.3, .1, .3, 1) both }
+@keyframes cr-in-l {
+  0% { opacity: 0; transform: translateX(-60vw) rotate(-5deg) } 15% { opacity: 1 }
+  50% { transform: translateX(14px) rotate(.6deg) scaleX(.97) }
+  66% { transform: translateX(-12px) rotate(-.8deg) }
+  82% { transform: translateX(4px) rotate(.2deg) }
+  100% { opacity: 1; transform: none }
+}
+@keyframes cr-in-r {
+  0% { opacity: 0; transform: translateX(60vw) rotate(5deg) } 15% { opacity: 1 }
+  50% { transform: translateX(-14px) rotate(-.6deg) scaleX(.97) }
+  66% { transform: translateX(12px) rotate(.8deg) }
+  82% { transform: translateX(-4px) rotate(-.2deg) }
+  100% { opacity: 1; transform: none }
+}
+.cr-l { transform-origin: right center } .cr-r { transform-origin: left center }
+/* impact flash in the gap */
+.cr-spark { position: absolute; z-index: 2; top: 50%; left: calc((100% - 24px) * 1.1 / 2 + 12px); width: 2px; height: 0; translate: -50% -50%; background: var(--accent); box-shadow: 0 0 24px 6px rgb(var(--accent-rgb) / .6); opacity: 0; pointer-events: none; border-radius: 2px }
+.cr-spark::before, .cr-spark::after { content: ""; position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; border: 1.5px solid var(--accent); opacity: 0 }
+.cr-hit .cr-spark { animation: cr-flash .7s ease-out .55s both }
+.cr-hit .cr-spark::before { animation: cr-ring .8s ease-out .55s both }
+.cr-hit .cr-spark::after { animation: cr-ring .8s ease-out .68s both }
+@keyframes cr-flash { 0% { opacity: 1; height: 0 } 30% { opacity: 1; height: 80% } 100% { opacity: 0; height: 100% } }
+@keyframes cr-ring { 0% { opacity: 1; transform: scale(.2) } 100% { opacity: 0; transform: scale(6) } }
+@media (max-width: 991px) { .cr-spark { display: none } }
 
 /* ---------- Contact + footer ---------- */
 .contact { position: relative; overflow: hidden; padding-bottom: 0 }
@@ -957,6 +986,8 @@ html { font-variant-emoji: text }
   .xp { grid-template-columns: 1fr }
   .xp-card { position: relative; top: 0 }
   .about-grid, .creds { grid-template-columns: 1fr }
+  .creds > div { padding: 20px 18px }
+  .edu-item { grid-template-columns: 1fr auto } .edu-item > .label { display: none }
   .manifesto-grid { grid-template-columns: 1fr; gap: 26px }
 }
 @media (max-width: 860px) {
@@ -987,8 +1018,6 @@ html { font-variant-emoji: text }
   .signal:nth-child(2) { border-right: 0 }
   .section-head { display: block } .section-head p { margin-top: 16px }
   .kicker span { display: none }
-  .creds > div { padding: 20px 18px }
-  .edu-item { grid-template-columns: 1fr auto } .edu-item > .label { display: none }
   .footer { flex-wrap: wrap }
   [data-theme="mono"] .ww-bar { top: 80px }
   .ww-bar { top: 66px }
@@ -1155,3 +1184,61 @@ html { font-variant-emoji: text }
 .at-done .at-arcs path, .at-done .at-arcs circle { opacity: 0 }
 .at-after { transition: opacity .45s .1s, transform .5s .1s cubic-bezier(.2, .8, .2, 1) }
 .at-wait .at-after { opacity: 0; transform: translateY(18px) }
+
+/* =========================================================================
+   MOTION DETAILS (js/fx.js)
+   ========================================================================= */
+/* 1. stat sparklines */
+.spark { width: 120px; height: 30px; margin-top: 8px; overflow: visible }
+.spark rect, .spark circle, .spark path { transition: .9s cubic-bezier(.2, .8, .2, 1) }
+.sp-bars rect { fill: rgb(var(--accent-rgb) / .55); transform-box: fill-box; transform-origin: bottom; transform: scaleY(0); transition-delay: calc(var(--i) * 60ms + .2s) }
+.sp-bars rect:last-child { fill: var(--accent) }
+.is-drawn .sp-bars rect { transform: none }
+.sp-base { fill: none; stroke: var(--line-2); stroke-dasharray: 3 3 }
+.sp-line { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s cubic-bezier(.6, 0, .2, 1) .2s }
+.is-drawn .sp-line { stroke-dashoffset: 0 }
+.sp-track { fill: var(--line) }
+.sp-fill { fill: var(--accent); transform-box: fill-box; transform-origin: left; transition: transform 1.3s cubic-bezier(.6, 0, .2, 1) .5s }
+.is-drawn .sp-fill { transform: scaleX(.16) }
+.sp-t { font: 8px var(--font-mono); fill: var(--dim); transition: opacity .6s 1s }
+.sp-b { fill: var(--accent); opacity: 0 }
+.is-drawn .sp-b { opacity: 1 }
+.is-drawn .sp-a { text-decoration: line-through }
+.sp-cov { fill: var(--accent); transform-box: fill-box; transform-origin: left; transform: scaleX(0); transition: transform 1.4s cubic-bezier(.6, 0, .2, 1) .2s }
+.is-drawn .sp-cov { transform: scaleX(.98) }
+.sp-tip { fill: var(--accent); opacity: 0; filter: drop-shadow(0 0 4px rgb(var(--accent-rgb) / .9)); transition: opacity .4s 1.5s }
+.is-drawn .sp-tip { opacity: 1 }
+
+/* 2. timeline head */
+.xp-head { position: absolute; left: 3px; top: calc(4px + var(--xp-p, 0) * (100% - 16px)); width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgb(var(--accent-rgb) / .15), 0 0 18px 4px rgb(var(--accent-rgb) / .6); opacity: calc(var(--xp-p, 0) * 40); pointer-events: none }
+.xp-head::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid var(--accent); animation: xp-ping 1.6s ease-out infinite }
+@keyframes xp-ping { from { transform: scale(.4); opacity: .9 } to { transform: scale(2.2); opacity: 0 } }
+.xp-item h4, .xp-item p { transition: opacity .5s, transform .5s cubic-bezier(.2, .8, .2, 1) }
+.xp-item:not(.is-lit) h4, .xp-item:not(.is-lit) p { opacity: .45 }
+
+/* 3. portrait scan */
+.pscan { position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit }
+.pscan::before { content: ""; position: absolute; inset: 0; background: radial-gradient(rgb(var(--accent-rgb) / .9) 1px, transparent 1.5px) 0 0 / 9px 9px; mix-blend-mode: screen; opacity: 0 }
+.pscan::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--accent); box-shadow: 0 0 18px 4px rgb(var(--accent-rgb) / .7); opacity: 0 }
+.is-scan .pscan::before { animation: pscan-grid 2.4s ease-out forwards }
+.is-scan .pscan::after { animation: pscan-line 1.5s cubic-bezier(.6, 0, .4, 1) forwards }
+@keyframes pscan-line { 0% { top: 0; opacity: 1 } 90% { opacity: 1 } 100% { top: 100%; opacity: 0 } }
+@keyframes pscan-grid { 0% { opacity: .55; clip-path: inset(0 0 100% 0) } 60% { opacity: .55; clip-path: inset(0 0 0 0) } 100% { opacity: 0; clip-path: inset(0 0 0 0) } }
+
+/* 5. magnetic contact word */
+.cw-l { display: inline-block; transition: transform .5s cubic-bezier(.2, .8, .2, 1), color .4s, -webkit-text-stroke-color .4s, text-shadow .4s; transform-origin: 50% 100% }
+.contact-word.is-snap .cw-l { transform: none !important; -webkit-text-stroke: 1px var(--accent); color: rgb(var(--accent-rgb) / .1); text-shadow: 0 0 40px rgb(var(--accent-rgb) / .35) }
+
+/* 7. nav section counter */
+.nav-sec { display: flex; align-items: center; gap: 6px; margin-left: 22px; font: 500 10px/1 var(--font-mono); letter-spacing: .08em; color: var(--dim); opacity: 0; transform: translateY(6px); transition: opacity .4s, transform .4s }
+.nav-sec.is-on { opacity: 1; transform: none }
+.ns-d, .ns-roll { color: var(--accent) }
+.ns-roll { display: inline-block; height: 1em; overflow: hidden; margin-left: -6px }
+.ns-col { display: flex; flex-direction: column; transition: transform .6s cubic-bezier(.65, 0, .35, 1) }
+.ns-col i { font-style: normal; height: 1em; line-height: 1 }
+.ns-name { margin-left: 6px; text-transform: uppercase; color: var(--muted) }
+.ns-name.is-in { animation: ns-in .5s cubic-bezier(.2, .8, .2, 1) }
+@keyframes ns-in { from { opacity: 0; transform: translateY(6px); filter: blur(3px) } }
+@media (max-width: 1180px) { .nav-sec { display: none } }
+/* cursor path (js/fx.js) */
+.cur-canvas { position: fixed; inset: 0; z-index: 999; width: 100vw; height: 100vh; pointer-events: none }

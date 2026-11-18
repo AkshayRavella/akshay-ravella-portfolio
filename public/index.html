@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/main.css?v=2026111803">
+<link rel="stylesheet" href="/css/main.css?v=2026111813">
 <!-- deferred + render-blocking: the page is built by these scripts, so the first frame (and the page-to-page view transition) waits for them -->
 <script src="/js/data.js?v=2026111803" defer blocking="render"></script>
 <script src="/js/visuals.js?v=2026111803" defer blocking="render"></script>
@@ -23,6 +23,7 @@
 <script src="/js/attention.js?v=2026111803" defer blocking="render"></script>
 <script src="/js/toolkit.js?v=2026111803" defer blocking="render"></script>
 <script src="/js/fluid.js?v=2026111803" defer blocking="render"></script>
+<script src="/js/fx.js?v=2026111815" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -80,10 +81,10 @@
 </section>
 
 <section class="signals" aria-label="Selected impact">
-  <div class="signal" data-reveal><span class="signal-num" data-count="17" data-suffix="K+">17K+</span><span class="label">Documents grounded in RAG</span></div>
-  <div class="signal" data-reveal><span class="signal-num" data-count="0.849" data-decimals="3">0.849</span><span class="label">ROC-AUC, priority model</span></div>
-  <div class="signal" data-reveal><span class="signal-num" data-count="6" data-suffix="×">6×</span><span class="label">Faster doc analysis (69→11 s)</span></div>
-  <div class="signal" data-reveal><span class="signal-num" data-count="98" data-suffix="%">98%</span><span class="label">Coverage, AI test generation</span></div>
+  <div class="signal" data-reveal data-spark="docs"><span class="signal-num" data-count="17" data-suffix="K+">17K+</span><span class="label">Documents grounded in RAG</span></div>
+  <div class="signal" data-reveal data-spark="roc"><span class="signal-num" data-count="0.849" data-decimals="3">0.849</span><span class="label">ROC-AUC, priority model</span></div>
+  <div class="signal" data-reveal data-spark="speed"><span class="signal-num" data-count="6" data-suffix="×">6×</span><span class="label">Faster doc analysis (69→11 s)</span></div>
+  <div class="signal" data-reveal data-spark="ring"><span class="signal-num" data-count="98" data-suffix="%">98%</span><span class="label">Coverage, AI test generation</span></div>
 </section>
 
 <!-- SELECTED WORK -->
@@ -181,14 +182,16 @@
     </div>
   </div>
 
+  <!-- Education + certifications: the two boxes fly in from the sides and collide into place (js/fx.js) -->
   <div class="creds">
-    <div class="surface" data-reveal>
+    <i class="cr-spark" aria-hidden="true"></i>
+    <div class="surface cr-box cr-l">
       <span class="label head">Education</span>
       <div class="edu-item"><span class="label">2024</span><div><strong>B.Tech, Electronics &amp; Communication Engineering</strong><small>DVR &amp; Dr. HS MIC College of Technology</small></div><b>8.91<small>CGPA</small></b></div>
       <div class="edu-item"><span class="label">2020</span><div><strong>Intermediate Education</strong><small>Capital Merits Junior College</small></div><b>9.82<small>CGPA</small></b></div>
       <div class="edu-item"><span class="label">2018</span><div><strong>Secondary School Certificate</strong><small>St. Paul's High School</small></div><b>10.0<small>CGPA</small></b></div>
     </div>
-    <div class="surface" data-reveal>
+    <div class="surface cr-box cr-r">
       <span class="label head">Certifications</span>
       <div class="cert"><span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span><p style="margin:0">Microsoft Certified: Power BI Data Analyst Associate</p></div>
       <div class="cert"><span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span><p style="margin:0">SnowPro Associate: Platform Certification</p></div>
