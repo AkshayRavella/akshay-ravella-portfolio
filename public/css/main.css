@@ -234,9 +234,7 @@ html { font-variant-emoji: text }
   width: 34px; height: 34px; display: grid; place-items: center; position: relative;
   border: 1px solid var(--accent); color: var(--accent); font: 700 13px var(--font-display); letter-spacing: -1px;
 }
-.brand-mark span { position: absolute; right: 3px; top: 0; font-size: 8px }
 [data-theme="mono"] .brand-mark { border: 0; border-radius: 50%; color: #fff; background: linear-gradient(180deg, #2a2a2f, #0c0c0e); letter-spacing: -.02em; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2) }
-[data-theme="mono"] .brand-mark span { display: none }
 .brand-name { font: 500 11px var(--font-mono); letter-spacing: .13em }
 [data-theme="mono"] .brand-name { font-size: 15px; font-weight: 700; letter-spacing: -.02em; text-transform: none }
 .nav-links { display: flex; gap: 30px; font-size: 11px; color: var(--ink-2) }
