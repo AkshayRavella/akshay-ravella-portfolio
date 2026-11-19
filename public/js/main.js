@@ -156,6 +156,19 @@
     tick(); setInterval(tick, 30000);
   }
 
+  /* ---------- Resume (placeholder until the PDF is ready) ---------- */
+  // TODO: when the resume is ready, point [data-resume] links at the PDF (e.g. /assets/Akshay-Ravella-Resume.pdf),
+  // add the `download` attribute and delete this handler.
+  document.querySelectorAll('[data-resume]').forEach(a => a.addEventListener('click', e => {
+    if (a.getAttribute('href') !== '#') return;
+    e.preventDefault();
+    let toast = document.querySelector('.toast');
+    if (!toast) { toast = document.createElement('div'); toast.className = 'toast'; toast.setAttribute('role', 'status'); document.body.append(toast); }
+    toast.textContent = 'Resume coming soon. Meanwhile, say hi at akshayravella@gmail.com';
+    toast.classList.add('is-on');
+    clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('is-on'), 2600);
+  }));
+
   revealAll();
   countAll();
   requestAnimationFrame(() => document.body.classList.add('is-loaded'));

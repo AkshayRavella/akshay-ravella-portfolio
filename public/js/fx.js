@@ -76,7 +76,12 @@
       canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); points = [];
     };
-    const inHero = py => { const r = hero?.getBoundingClientRect(); return r && py > r.top && py < r.bottom; };
+    const net = $('.contact-net');
+    // no trail over the hero or the contact network (both have their own motion)
+    const inHero = (py, px) => {
+      const r = hero?.getBoundingClientRect(), n = net?.getBoundingClientRect();
+      return (r && py > r.top && py < r.bottom) || (n && n.width && px > n.left && px < n.right && py > n.top && py < n.bottom);
+    };
     const tick = () => {
       const now = performance.now();
       const moving = Math.abs(tx - x) + Math.abs(ty - y) > .1;
@@ -108,7 +113,7 @@
     addEventListener('pointermove', e => {
       if (e.pointerType !== 'mouse') return;
       tx = e.clientX; ty = e.clientY;
-      const ok = !inHero(ty);
+      const ok = !inHero(ty, tx);
       if (ok && !inside) { x = tx; y = ty; }
       inside = ok;
       if (!raf) raf = requestAnimationFrame(tick);
