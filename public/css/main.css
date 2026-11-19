@@ -1229,16 +1229,5 @@ html { font-variant-emoji: text }
 .cw-l { display: inline-block; transition: transform .5s cubic-bezier(.2, .8, .2, 1), color .4s, -webkit-text-stroke-color .4s, text-shadow .4s; transform-origin: 50% 100% }
 .contact-word.is-snap .cw-l { transform: none !important; -webkit-text-stroke: 1px var(--accent); color: rgb(var(--accent-rgb) / .1); text-shadow: 0 0 40px rgb(var(--accent-rgb) / .35) }
 
-/* 7. nav section counter */
-.nav-sec { display: flex; align-items: center; gap: 6px; margin-left: 22px; font: 500 10px/1 var(--font-mono); letter-spacing: .08em; color: var(--dim); opacity: 0; transform: translateY(6px); transition: opacity .4s, transform .4s }
-.nav-sec.is-on { opacity: 1; transform: none }
-.ns-d, .ns-roll { color: var(--accent) }
-.ns-roll { display: inline-block; height: 1em; overflow: hidden; margin-left: -6px }
-.ns-col { display: flex; flex-direction: column; transition: transform .6s cubic-bezier(.65, 0, .35, 1) }
-.ns-col i { font-style: normal; height: 1em; line-height: 1 }
-.ns-name { margin-left: 6px; text-transform: uppercase; color: var(--muted) }
-.ns-name.is-in { animation: ns-in .5s cubic-bezier(.2, .8, .2, 1) }
-@keyframes ns-in { from { opacity: 0; transform: translateY(6px); filter: blur(3px) } }
-@media (max-width: 1180px) { .nav-sec { display: none } }
 /* cursor path (js/fx.js) */
 .cur-canvas { position: fixed; inset: 0; z-index: 999; width: 100vw; height: 100vh; pointer-events: none; filter: blur(2px) }

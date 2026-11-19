@@ -1,5 +1,5 @@
 // Small motion details: stat sparklines, timeline head, portrait scan, magnetic contact word,
-// and the nav section counter. Each part only runs if its markup is on the page.
+// cursor path and the credentials entrance. Each part only runs if its markup is on the page.
 (() => {
   if (window.AR?.reduced) return;
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -131,25 +131,4 @@
     }, { threshold: .3 }).observe(creds);
   }
 
-  /* ---------- 7. Nav section counter (odometer) ---------- */
-  const brand = $('.nav .brand');
-  const secs = ['manifesto', 'work', 'experience', 'about', 'contact'].map(id => document.getElementById(id)).filter(Boolean);
-  if (brand && secs.length === 5) {
-    const names = ['Point of view', 'Work', 'Experience', 'About', 'Contact'];
-    brand.insertAdjacentHTML('afterend', `<div class="nav-sec" aria-hidden="true"><span class="ns-d">0</span><span class="ns-roll"><span class="ns-col">${[1, 2, 3, 4, 5].map(n => `<i>${n}</i>`).join('')}</span></span><span class="ns-of">/ 05</span><span class="ns-name"></span></div>`);
-    const box = $('.nav-sec'), col = $('.ns-col', box), nm = $('.ns-name', box);
-    let cur = -1;
-    window.AR.onScroll(() => {
-      const mark = innerHeight * .45;
-      let i = -1;
-      secs.forEach((s, k) => { if (s.getBoundingClientRect().top < mark) i = k; });
-      if (i === cur) return;
-      cur = i;
-      box.classList.toggle('is-on', i >= 0);
-      if (i < 0) return;
-      col.style.transform = `translateY(${-i * 20}%)`;
-      nm.classList.remove('is-in'); void nm.offsetWidth;
-      nm.textContent = names[i]; nm.classList.add('is-in');
-    });
-  }
 })();
