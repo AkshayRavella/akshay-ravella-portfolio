@@ -59,9 +59,17 @@
     };
     contact.addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; if (!raf) raf = requestAnimationFrame(pull); });
     contact.addEventListener('pointerleave', () => { mx = my = -1e4; if (!raf) raf = requestAnimationFrame(pull); });
-    const email = $('.contact-email');
-    email?.addEventListener('pointerenter', () => word.classList.add('is-snap'));
-    email?.addEventListener('pointerleave', () => word.classList.remove('is-snap'));
+    // the word lights up while the pointer is on the email, any contact button, or the network
+    const net = $('.contact-net');
+    const glowOn = e => {
+      const onLink = !!e.target.closest?.('.contact-email, .contact-links a');
+      const r = net?.getBoundingClientRect();
+      const onNet = !!(r && r.width && e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom);
+      word.classList.toggle('is-snap', onLink || onNet);
+    };
+    contact.addEventListener('pointermove', glowOn, { passive: true });
+    contact.addEventListener('pointerover', glowOn);
+    contact.addEventListener('pointerleave', () => word.classList.remove('is-snap'));
   }
 
   /* ---------- 6. Cursor: an eased point that draws a glowing path behind the pointer (outside the hero) ---------- */
