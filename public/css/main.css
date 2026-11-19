@@ -1229,16 +1229,17 @@ html { font-variant-emoji: text }
 .cw-l { display: inline-block; transition: transform .5s cubic-bezier(.2, .8, .2, 1), color .4s, -webkit-text-stroke-color .4s, text-shadow .4s; transform-origin: 50% 100% }
 .contact-word.is-snap .cw-l { transform: none !important; -webkit-text-stroke: 1px var(--accent); color: rgb(var(--accent-rgb) / .1); text-shadow: 0 0 40px rgb(var(--accent-rgb) / .35) }
 
-/* 7. nav section counter */
-.nav-sec { display: flex; align-items: center; gap: 6px; margin-left: 22px; font: 500 10px/1 var(--font-mono); letter-spacing: .08em; color: var(--dim); opacity: 0; transform: translateY(6px); transition: opacity .4s, transform .4s }
-.nav-sec.is-on { opacity: 1; transform: none }
-.ns-d, .ns-roll { color: var(--accent) }
-.ns-roll { display: inline-block; height: 1em; overflow: hidden; margin-left: -6px }
-.ns-col { display: flex; flex-direction: column; transition: transform .6s cubic-bezier(.65, 0, .35, 1) }
-.ns-col i { font-style: normal; height: 1em; line-height: 1 }
-.ns-name { margin-left: 6px; text-transform: uppercase; color: var(--muted) }
-.ns-name.is-in { animation: ns-in .5s cubic-bezier(.2, .8, .2, 1) }
-@keyframes ns-in { from { opacity: 0; transform: translateY(6px); filter: blur(3px) } }
-@media (max-width: 1180px) { .nav-sec { display: none } }
 /* cursor path (js/fx.js) */
 .cur-canvas { position: fixed; inset: 0; z-index: 999; width: 100vw; height: 100vh; pointer-events: none; filter: blur(2px) }
+
+/* resume button + placeholder toast */
+.contact-links [data-resume] svg { width: 14px; height: 14px }
+.toast { position: fixed; left: 50%; bottom: 28px; z-index: 2000; translate: -50% 20px; padding: 12px 18px; border: 1px solid var(--line-2); background: var(--panel-2); color: var(--ink); font: 12px var(--font-mono); letter-spacing: .04em; border-radius: var(--r-btn); opacity: 0; pointer-events: none; transition: opacity .3s, translate .3s }
+.toast.is-on { opacity: 1; translate: -50% 0 }
+
+/* contact network (js/network.js) */
+.contact-net { position: absolute; z-index: 0; top: 220px; right: 0; width: min(780px, 52%); aspect-ratio: 6 / 5 }
+.contact-net canvas { width: 100%; height: 100%; display: block }
+/* soften the edges so the network melts into the page instead of ending in a box */
+.contact-net { -webkit-mask-image: radial-gradient(closest-side, #000 78%, transparent); mask-image: radial-gradient(closest-side, #000 78%, transparent) }
+@media (max-width: 991px) { .contact-net { display: none } }

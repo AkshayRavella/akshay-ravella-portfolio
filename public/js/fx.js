@@ -1,5 +1,5 @@
 // Small motion details: stat sparklines, timeline head, portrait scan, magnetic contact word,
-// and the nav section counter. Each part only runs if its markup is on the page.
+// cursor path and the credentials entrance. Each part only runs if its markup is on the page.
 (() => {
   if (window.AR?.reduced) return;
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -59,9 +59,17 @@
     };
     contact.addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; if (!raf) raf = requestAnimationFrame(pull); });
     contact.addEventListener('pointerleave', () => { mx = my = -1e4; if (!raf) raf = requestAnimationFrame(pull); });
-    const email = $('.contact-email');
-    email?.addEventListener('pointerenter', () => word.classList.add('is-snap'));
-    email?.addEventListener('pointerleave', () => word.classList.remove('is-snap'));
+    // the word lights up while the pointer is on the email, any contact button, or the network
+    const net = $('.contact-net');
+    const glowOn = e => {
+      const onLink = !!e.target.closest?.('.contact-email, .contact-links a');
+      const r = net?.getBoundingClientRect();
+      const onNet = !!(r && r.width && e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom);
+      word.classList.toggle('is-snap', onLink || onNet);
+    };
+    contact.addEventListener('pointermove', glowOn, { passive: true });
+    contact.addEventListener('pointerover', glowOn);
+    contact.addEventListener('pointerleave', () => word.classList.remove('is-snap'));
   }
 
   /* ---------- 6. Cursor: an eased point that draws a glowing path behind the pointer (outside the hero) ---------- */
@@ -76,7 +84,12 @@
       canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); points = [];
     };
-    const inHero = py => { const r = hero?.getBoundingClientRect(); return r && py > r.top && py < r.bottom; };
+    const net = $('.contact-net');
+    // no trail over the hero or the contact network (both have their own motion)
+    const inHero = (py, px) => {
+      const r = hero?.getBoundingClientRect(), n = net?.getBoundingClientRect();
+      return (r && py > r.top && py < r.bottom) || (n && n.width && px > n.left && px < n.right && py > n.top && py < n.bottom);
+    };
     const tick = () => {
       const now = performance.now();
       const moving = Math.abs(tx - x) + Math.abs(ty - y) > .1;
@@ -108,7 +121,7 @@
     addEventListener('pointermove', e => {
       if (e.pointerType !== 'mouse') return;
       tx = e.clientX; ty = e.clientY;
-      const ok = !inHero(ty);
+      const ok = !inHero(ty, tx);
       if (ok && !inside) { x = tx; y = ty; }
       inside = ok;
       if (!raf) raf = requestAnimationFrame(tick);
@@ -131,25 +144,4 @@
     }, { threshold: .3 }).observe(creds);
   }
 
-  /* ---------- 7. Nav section counter (odometer) ---------- */
-  const brand = $('.nav .brand');
-  const secs = ['manifesto', 'work', 'experience', 'about', 'contact'].map(id => document.getElementById(id)).filter(Boolean);
-  if (brand && secs.length === 5) {
-    const names = ['Point of view', 'Work', 'Experience', 'About', 'Contact'];
-    brand.insertAdjacentHTML('afterend', `<div class="nav-sec" aria-hidden="true"><span class="ns-d">0</span><span class="ns-roll"><span class="ns-col">${[1, 2, 3, 4, 5].map(n => `<i>${n}</i>`).join('')}</span></span><span class="ns-of">/ 05</span><span class="ns-name"></span></div>`);
-    const box = $('.nav-sec'), col = $('.ns-col', box), nm = $('.ns-name', box);
-    let cur = -1;
-    window.AR.onScroll(() => {
-      const mark = innerHeight * .45;
-      let i = -1;
-      secs.forEach((s, k) => { if (s.getBoundingClientRect().top < mark) i = k; });
-      if (i === cur) return;
-      cur = i;
-      box.classList.toggle('is-on', i >= 0);
-      if (i < 0) return;
-      col.style.transform = `translateY(${-i * 20}%)`;
-      nm.classList.remove('is-in'); void nm.offsetWidth;
-      nm.textContent = names[i]; nm.classList.add('is-in');
-    });
-  }
 })();
