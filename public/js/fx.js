@@ -59,17 +59,20 @@
     };
     contact.addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; if (!raf) raf = requestAnimationFrame(pull); });
     contact.addEventListener('pointerleave', () => { mx = my = -1e4; if (!raf) raf = requestAnimationFrame(pull); });
-    // the word lights up while the pointer is on the email, any contact button, or the network
+    // the word lights up while the pointer is on it, the email, any contact button, or the network
     const net = $('.contact-net');
     const glowOn = e => {
       const onLink = !!e.target.closest?.('.contact-email, .contact-links a');
       const r = net?.getBoundingClientRect();
       const onNet = !!(r && r.width && e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom);
-      word.classList.toggle('is-snap', onLink || onNet);
+      const w = word.getBoundingClientRect();
+      const onWord = e.clientX > w.left && e.clientX < w.right && e.clientY > w.top && e.clientY < w.bottom;
+      word.classList.toggle('is-snap', onLink || onNet);          // email / buttons: glow and letters snap straight
+      word.classList.toggle('is-glow', onWord && !onLink && !onNet); // over the word itself: glow, letters keep following the pointer
     };
     contact.addEventListener('pointermove', glowOn, { passive: true });
     contact.addEventListener('pointerover', glowOn);
-    contact.addEventListener('pointerleave', () => word.classList.remove('is-snap'));
+    contact.addEventListener('pointerleave', () => word.classList.remove('is-snap', 'is-glow'));
   }
 
   /* ---------- 6. Cursor: an eased point that draws a glowing path behind the pointer (outside the hero) ---------- */
