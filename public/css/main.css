@@ -1226,6 +1226,7 @@ html { font-variant-emoji: text }
 /* 5. magnetic contact word */
 .cw-l { display: inline-block; transition: transform .5s cubic-bezier(.2, .8, .2, 1), color .4s, -webkit-text-stroke-color .4s, text-shadow .4s; transform-origin: 50% 100% }
 .contact-word.is-snap .cw-l { transform: none !important; -webkit-text-stroke: 1px var(--accent); color: rgb(var(--accent-rgb) / .1); text-shadow: 0 0 40px rgb(var(--accent-rgb) / .35) }
+.contact-word.is-glow .cw-l { -webkit-text-stroke: 1px var(--accent); color: rgb(var(--accent-rgb) / .1); text-shadow: 0 0 40px rgb(var(--accent-rgb) / .35) }
 
 /* cursor path (js/fx.js) */
 .cur-canvas { position: fixed; inset: 0; z-index: 999; width: 100vw; height: 100vh; pointer-events: none; filter: blur(2px) }
@@ -1241,3 +1242,5 @@ html { font-variant-emoji: text }
 /* soften the edges so the network melts into the page instead of ending in a box */
 .contact-net { -webkit-mask-image: radial-gradient(closest-side, #000 78%, transparent); mask-image: radial-gradient(closest-side, #000 78%, transparent) }
 @media (max-width: 991px) { .contact-net { display: none } }
+/* network hidden for now (code kept in js/network.js); delete this rule to bring it back */
+.contact-net { display: none }
