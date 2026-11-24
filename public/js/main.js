@@ -8,14 +8,16 @@
 
   /* ---------- Theme ---------- */
   const themeMeta = document.querySelector('meta[name="theme-color"]');
-  const applyTheme = theme => {
+  // Paper is the default. Only a click on the toggle is remembered (as 'ar-theme-pick'), so visitors who
+  // never chose a theme always get the default.
+  const applyTheme = (theme, remember) => {
     root.dataset.theme = theme;
-    try { localStorage.setItem('ar-theme', theme); } catch (e) { /* private mode */ }
+    if (remember) try { localStorage.setItem('ar-theme-pick', theme); } catch (e) { /* private mode */ }
     if (themeMeta) themeMeta.content = THEME_COLORS[theme];
     document.querySelectorAll('[data-theme-label]').forEach(el => { el.textContent = theme === 'acid' ? LIGHT[0].toUpperCase() + LIGHT.slice(1) : 'Acid'; });
   };
   // Themes in use: acid (dark) and LIGHT. Lavender and mono styles are kept in the CSS but not offered.
-  applyTheme(root.dataset.theme === 'acid' || !root.dataset.theme ? 'acid' : LIGHT);
+  applyTheme(root.dataset.theme === 'acid' ? 'acid' : LIGHT);
 
   // Mono theme backdrop: faint contour lines (same recipe as the liquid-glass design system).
   const contours = document.querySelector('.contours');
@@ -26,13 +28,13 @@
 
   document.querySelectorAll('[data-theme-toggle]').forEach(btn => btn.addEventListener('click', e => {
     const next = root.dataset.theme === 'acid' ? LIGHT : 'acid';
-    if (!document.startViewTransition || reduced) return applyTheme(next);
+    if (!document.startViewTransition || reduced) return applyTheme(next, true);
     // Circular reveal that grows out of the toggle button.
     const r = btn.getBoundingClientRect();
     const x = e.clientX || r.left + r.width / 2, y = e.clientY || r.top + r.height / 2;
     const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
     root.classList.add('theme-switching');
-    const vt = document.startViewTransition(() => applyTheme(next));
+    const vt = document.startViewTransition(() => applyTheme(next, true));
     vt.ready.then(() => root.animate(
       { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
       { duration: 750, easing: 'cubic-bezier(.65,0,.35,1)', pseudoElement: '::view-transition-new(root)' }
@@ -92,10 +94,27 @@
     navTargets.forEach(([, el]) => spy.observe(el));
   }
 
+  /* ---------- Smooth wheel scrolling (Lenis, js/vendor/lenis.min.js) ---------- */
+  // A mouse wheel jumps ~100px per notch, which makes the scroll-linked animations step and feel stuck
+  // (most noticeable on Windows). Lenis eases each notch into a glide; touch scrolling stays native.
+  // Switched off for now: native scrolling is preferred. Set to true to bring the glide back.
+  const SMOOTH_WHEEL = false;
+  let lenis = null;
+  if (SMOOTH_WHEEL && !reduced && window.Lenis) {
+    lenis = new window.Lenis({ lerp: 0.14, wheelMultiplier: 1.15, smoothWheel: true, syncTouch: false, anchors: { offset: -96 } });
+    const loop = t => { lenis.raf(t); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  }
+
   /* ---------- Scroll progress ---------- */
   const progress = document.querySelector('.progress');
   const scrollHooks = [];
-  window.AR = { onScroll: fn => { scrollHooks.push(fn); fn(); }, reduced };
+  // AR.scrollTo: the one way scripts move the page, so programmatic scrolls and Lenis never disagree.
+  const scrollToY = (top, { instant = false } = {}) => {
+    if (lenis) return lenis.scrollTo(top, { immediate: instant, force: true });
+    scrollTo({ top, behavior: instant || reduced ? 'instant' : 'smooth' });
+  };
+  window.AR = { onScroll: fn => { scrollHooks.push(fn); fn(); }, scrollTo: scrollToY, reduced };
   let ticking = false;
   const onScroll = () => {
     const max = root.scrollHeight - innerHeight;
@@ -168,6 +187,14 @@
     toast.classList.add('is-on');
     clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('is-on'), 2600);
   }));
+
+  /* ---------- Pause looping animations in sections that are off screen ---------- */
+  // Nothing visible changes: a section's animations stop while it is out of view and resume
+  // (a little before it scrolls back in) where they left off. Saves steady CPU/GPU work on slower machines.
+  if ('IntersectionObserver' in window) {
+    const offIO = new IntersectionObserver(entries => entries.forEach(e => e.target.toggleAttribute('data-off', !e.isIntersecting)), { rootMargin: '250px 0px' });
+    document.querySelectorAll('main > *').forEach(el => offIO.observe(el));
+  }
 
   revealAll();
   countAll();
