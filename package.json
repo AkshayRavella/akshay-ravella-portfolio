@@ -1,0 +1,9 @@
+{
+  "name": "akshay-ravella-portfolio",
+  "private": true,
+  "description": "Static portfolio (public/) plus one Vercel serverless function for the contact form (api/contact.js).",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}
