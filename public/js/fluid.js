@@ -160,12 +160,18 @@ void main(){
   new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   // ---------- size ----------
+  let quality = 1;   // lowered automatically on slow GPUs (see the loop)
   const resize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    // Performance: the smoke is drawn from a 512px dye texture, so painting the canvas above ~1 megapixel
+    // adds GPU work without adding detail. Render at up to 1x and cap the pixel count; the browser's
+    // smooth upscale keeps the (already soft) smoke looking the same on retina and 150%-scaled screens.
     const r = canvas.getBoundingClientRect();
-    const w = Math.max(2, Math.round(r.width * dpr)), h = Math.max(2, Math.round(r.height * dpr));
+    const k = Math.min(1, Math.sqrt(1.1e6 / Math.max(1, r.width * r.height))) * quality;
+    const w = Math.max(2, Math.round(r.width * k)), h = Math.max(2, Math.round(r.height * k));
     if (w === canvas.width && h === canvas.height && velocity) return;
-    canvas.width = w; canvas.height = h; initTargets();
+    const aspectChanged = !velocity || Math.abs(w / h - canvas.width / canvas.height) > .01;
+    canvas.width = w; canvas.height = h;
+    if (aspectChanged) initTargets();   // a quality step only changes the output size, so the smoke carries on
   };
   resize();
   if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas);
@@ -190,11 +196,18 @@ void main(){
   window.addEventListener('pointerleave', () => { last = null; });
 
   // ---------- loop (pauses off-screen / hidden / when settled) ----------
-  let visible = true, raf = 0, prev = performance.now(), idleFrames = 0;
+  let visible = true, raf = 0, prev = performance.now(), idleFrames = 0, slowAvg = 16, slowHits = 0;
   const frame = now => {
     raf = 0;
     if (!visible || document.hidden) return;
-    const dt = Math.min((now - prev) / 1000, 1 / 30); prev = now;
+    const frameMs = now - prev;
+    const dt = Math.min(frameMs / 1000, 1 / 30); prev = now;
+    // Slow GPU guard: if frames keep running long, render the (soft) smoke at a lower resolution.
+    // It looks the same but costs far fewer pixels. Steps down at most twice.
+    if (idleFrames > 2) {
+      slowAvg = slowAvg * .9 + frameMs * .1;
+      if (slowAvg > 24 && quality > .55 && ++slowHits > 45) { quality = Math.max(.55, quality * .75); slowHits = 0; slowAvg = 16; resize(); }
+    }
     while (queued.length) splat(...queued.shift());
     step(dt);
     gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);

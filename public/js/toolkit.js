@@ -80,7 +80,7 @@
     if (p > 0 && p < 1 && !dragging) snapT = setTimeout(() => {
       const top = sec.getBoundingClientRect().top + scrollY;
       const want = top + Math.round(target) * perCard();
-      if (Math.abs(want - scrollY) > 2) scrollTo({ top: want, behavior: 'smooth' });
+      if (Math.abs(want - scrollY) > 2) window.AR.scrollTo(want);
     }, 180);
   };
 
@@ -93,7 +93,7 @@
   });
   view.addEventListener('pointermove', e => {
     if (!dragging) return;
-    scrollTo({ top: sy - (e.clientX - sx) / step * perCard(), behavior: 'instant' });
+    window.AR.scrollTo(sy - (e.clientX - sx) / step * perCard(), { instant: true });
   });
   const end = () => { if (!dragging) return; dragging = false; view.classList.remove('is-drag'); read(); };
   view.addEventListener('pointerup', end);
@@ -102,7 +102,7 @@
   view.addEventListener('wheel', e => {
     if (!desktop.matches || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault();
-    scrollBy({ top: e.deltaX / step * perCard(), behavior: 'instant' });
+    window.AR.scrollTo(scrollY + e.deltaX / step * perCard(), { instant: true });
   }, { passive: false });
 
   view.addEventListener('scroll', () => { if (!desktop.matches) kick(); }, { passive: true });

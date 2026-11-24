@@ -82,11 +82,13 @@
     const canvas = $('.cur-canvas'), ctx = canvas.getContext('2d'), hero = $('.hero');
     let points = [], width = 2, raf = 0, inside = false, tx = 0, ty = 0, x = 0, y = 0, rgb = '215,250,99';
     const colour = () => { rgb = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim().split(/\s+/).join(',') || rgb; };
+    // Performance: the canvas is CSS-blurred, so 1x resolution looks identical to retina and costs a quarter
+    // of the pixels; and it is taken out of the page (hidden) whenever no trail is drawing, so the browser
+    // doesn't keep compositing a full-screen blurred layer while you scroll.
     const resize = () => {
-      const dpr = Math.min(devicePixelRatio || 1, 2);
-      canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); points = [];
+      canvas.width = innerWidth; canvas.height = innerHeight; points = [];
     };
+    canvas.hidden = true;
     const net = $('.contact-net');
     // no trail over the hero or the contact network (both have their own motion)
     const inHero = (py, px) => {
@@ -119,6 +121,7 @@
         ctx.stroke();
       }
       raf = points.length || moving ? requestAnimationFrame(tick) : 0;
+      if (!raf) { ctx.clearRect(0, 0, innerWidth, innerHeight); canvas.hidden = true; }
     };
     const clamp = v => Math.min(1, Math.max(0, v));
     addEventListener('pointermove', e => {
@@ -127,7 +130,7 @@
       const ok = !inHero(ty, tx);
       if (ok && !inside) { x = tx; y = ty; }
       inside = ok;
-      if (!raf) raf = requestAnimationFrame(tick);
+      if (!raf) { if (ok) canvas.hidden = false; raf = requestAnimationFrame(tick); }
     }, { passive: true });
     const stop = () => { inside = false; };
     document.addEventListener('mouseleave', stop);

@@ -97,7 +97,7 @@
   const goTo = i => {
     if (desktop.matches) {
       const { top, total } = range();
-      scrollTo({ top: top + total * ((i + 0.5) / N), behavior: window.AR.reduced ? 'auto' : 'smooth' });
+      window.AR.scrollTo(top + total * ((i + 0.5) / N));
     } else {
       lockUntil = Date.now() + 1500;
       setStep(i);
@@ -114,10 +114,20 @@
   const list = document.querySelector('.xp-list');
   if (list) {
     const items = [...list.querySelectorAll('.xp-item')];
+    // Item offsets are measured once (and on resize) instead of on every scroll frame.
+    let offs = [];
+    const measure = () => { offs = items.map(it => it.offsetTop); };
+    measure();
+    addEventListener('resize', measure, { passive: true });
+    document.fonts?.ready.then(measure);
+    let lastP = -1;
     window.AR.onScroll(() => {
       const r = list.getBoundingClientRect(), mark = innerHeight * 0.62;
-      list.style.setProperty('--xp-p', Math.min(Math.max((mark - r.top) / r.height, 0), 1).toFixed(4));
-      items.forEach(it => it.classList.toggle('is-lit', it.getBoundingClientRect().top < mark));
+      const p = Math.min(Math.max((mark - r.top) / r.height, 0), 1);
+      if (Math.abs(p - lastP) < .0005) return;
+      lastP = p;
+      list.style.setProperty('--xp-p', p.toFixed(4));
+      items.forEach((it, i) => it.classList.toggle('is-lit', r.top + offs[i] < mark));
     });
   }
 })();

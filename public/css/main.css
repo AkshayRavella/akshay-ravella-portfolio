@@ -1244,3 +1244,15 @@ html { font-variant-emoji: text }
 @media (max-width: 991px) { .contact-net { display: none } }
 /* network hidden for now (code kept in js/network.js); delete this rule to bring it back */
 .contact-net { display: none }
+
+/* Lenis smooth scrolling (js/main.js): it drives the scroll itself, so native smooth scrolling must be off while it runs */
+html.lenis, html.lenis body { height: auto }
+html.lenis { scroll-behavior: auto !important }
+.lenis.lenis-stopped { overflow: clip }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain }
+.lenis.lenis-smooth iframe { pointer-events: none }
+/* off-screen sections (js/main.js): loops pause while out of view */
+[data-off] *, [data-off] *::before, [data-off] *::after { animation-play-state: paused !important }
+
+/* hero pipeline caption ("Context → Reasoning → Tool use → Output · 05 systems live"): hidden for now, markup kept in index.html */
+.ai-readout { display: none !important }
