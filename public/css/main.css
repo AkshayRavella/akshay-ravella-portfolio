@@ -1256,3 +1256,43 @@ html.lenis { scroll-behavior: auto !important }
 
 /* hero pipeline caption ("Context → Reasoning → Tool use → Output · 05 systems live"): hidden for now, markup kept in index.html */
 .ai-readout { display: none !important }
+
+/* phone number hidden for now (link kept in index.html) */
+.contact-links a[href^="tel:"] { display: none !important }
+
+/* =========================================================================
+   CONTACT FORM (js/contact.js → /api/contact)
+   ========================================================================= */
+.contact-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(32px, 4.5vw, 72px); align-items: end }
+.contact-grid .contact-body { max-width: none }
+.contact-form { padding-bottom: 100px; display: flex; flex-direction: column; gap: 18px }
+.cf-head { color: var(--accent) !important; padding-bottom: 14px; border-bottom: 1px solid var(--line) }
+.cf-field { display: flex; flex-direction: column; gap: 8px }
+.cf-field label { font: 500 var(--label-size) var(--font-mono); letter-spacing: var(--label-track); text-transform: var(--label-case); color: var(--muted) }
+.cf-field label i { font-style: normal; color: var(--accent-2) }
+.cf-field input, .cf-field textarea {
+  width: 100%; box-sizing: border-box; padding: 13px 14px; font: 15px/1.5 var(--font-sans); color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r-sm); outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.cf-field textarea { resize: vertical; min-height: 128px }
+.cf-field input:hover, .cf-field textarea:hover { border-color: var(--dim) }
+.cf-field input:focus, .cf-field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgb(var(--accent-rgb) / .18) }
+.cf-field.is-invalid input, .cf-field.is-invalid textarea { border-color: #d64545; box-shadow: 0 0 0 3px rgb(214 69 69 / .12) }
+.cf-err { margin: 0; min-height: 0; font-size: 12.5px; color: #d64545 }
+.cf-err:empty { display: none }
+.cf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden }
+.cf-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 18px; margin-top: 4px }
+.cf-send svg { width: 14px; height: 14px; transition: transform .3s }
+.cf-send:hover svg { transform: translate(2px, -2px) }
+.cf-send:disabled { opacity: .7; cursor: progress }
+.is-sending .cf-send svg { animation: cf-pulse 1s ease-in-out infinite }
+@keyframes cf-pulse { 50% { transform: translate(3px, -3px); opacity: .4 } }
+.cf-status { margin: 0; font-size: 13px; color: var(--muted); max-width: 360px }
+.cf-status[data-kind="ok"] { color: var(--accent) }
+.cf-status[data-kind="err"] { color: #d64545 }
+@media (max-width: 991px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 0 }
+  .contact-grid .contact-body { padding-bottom: 40px }
+  .contact-form { padding-bottom: 80px }
+}
