@@ -1,4 +1,5 @@
-// Contact form: validates as you go, then posts to /api/contact (api/contact.js), which emails me.
+// Contact form on a sticky note held by a paper clip: validates as you go, then posts to /api/contact (api/contact.js),
+// which emails me. When the message is sent, the note peels off and flies away.
 // Without JavaScript the form still posts to the same endpoint.
 (() => {
   const form = document.getElementById('contact-form');
@@ -8,6 +9,32 @@
   const opened = Date.now();
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const FALLBACK = 'akshayravella@gmail.com';
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pad = form.closest('.notepad');
+
+  // Sent: a copy of the filled note peels off and flies away, leaving a fresh note under the pin
+  const tear = () => {
+    if (!pad || reduced) return;
+    const page = form.cloneNode(true);
+    page.removeAttribute('id');
+    page.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+    Object.keys(fields).forEach(k => {
+      const el = page.querySelector(`[name="${k}"]`);
+      if (k === 'message') el.textContent = fields[k].value; else el.setAttribute('value', fields[k].value);
+    });
+    page.querySelector('.cf-status').textContent = '';
+    page.querySelector('.cf-send-text').textContent = 'Send message';
+    page.querySelector('.cf-send').disabled = false;
+    page.classList.remove('is-sending', 'is-shake');
+    page.classList.add('np-torn');
+    Object.assign(page.style, { left: form.offsetLeft + 'px', top: form.offsetTop + 'px', width: form.offsetWidth + 'px', height: form.offsetHeight + 'px' });
+    pad.append(page);
+    page.addEventListener('animationend', () => page.remove(), { once: true });
+  };
+  const shake = () => {
+    form.classList.remove('is-shake'); void form.offsetWidth; form.classList.add('is-shake');
+    form.addEventListener('animationend', () => form.classList.remove('is-shake'), { once: true });
+  };
 
   const check = {
     name: v => !v ? 'Name is required' : '',
@@ -28,12 +55,12 @@
     el.addEventListener('input', () => { if (el.closest('.cf-field').classList.contains('is-invalid')) validate(key); });
   });
 
-  const setStatus = (msg, kind) => { status.textContent = msg; status.dataset.kind = kind || ''; };
+  const setStatus = (msg, kind) => { clearTimeout(status._t); status.classList.remove('is-fading'); status.textContent = msg; status.dataset.kind = kind || ''; };
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const ok = Object.keys(fields).map(validate).every(Boolean);
-    if (!ok) { fields[Object.keys(fields).find(k => fields[k].getAttribute('aria-invalid') === 'true')].focus(); return; }
+    if (!ok) { shake(); fields[Object.keys(fields).find(k => fields[k].getAttribute('aria-invalid') === 'true')].focus(); return; }
 
     form.classList.add('is-sending'); btn.disabled = true; btnText.textContent = 'Sending…'; setStatus('');
     try {
@@ -46,18 +73,25 @@
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
+        tear();
         form.reset();
         Object.keys(fields).forEach(k => { show(k, ''); delete fields[k].dataset.touched; });
         form.classList.add('is-sent');
-        setStatus('Thanks! Your message is on its way. I usually reply within a day or two.', 'ok');
+        setStatus('Thanks! I usually reply within a day or two.', 'ok');
+        // the thank-you stays for 4 seconds, then fades away
+        clearTimeout(status._t);
+        status._t = setTimeout(() => {
+          status.classList.add('is-fading');
+          setTimeout(() => { status.classList.remove('is-fading'); if (status.dataset.kind === 'ok') setStatus(''); form.classList.remove('is-sent'); }, 500);
+        }, 4000);
       } else if (data.errors) {
         Object.entries(data.errors).forEach(([k, msg]) => fields[k] && show(k, msg));
-        setStatus('Please fix the highlighted fields.', 'err');
+        setStatus('Please fix the highlighted fields.', 'err'); shake();
       } else {
-        setStatus(`${data.error || 'Could not send right now.'} You can also write to ${FALLBACK}.`, 'err');
+        setStatus(`${data.error || 'Could not send right now.'} You can also write to ${FALLBACK}.`, 'err'); shake();
       }
     } catch (err) {
-      setStatus(`Could not send right now. Please email me at ${FALLBACK}.`, 'err');
+      setStatus(`Could not send right now. Please email me at ${FALLBACK}.`, 'err'); shake();
     } finally {
       form.classList.remove('is-sending'); btn.disabled = false; btnText.textContent = 'Send message';
     }
