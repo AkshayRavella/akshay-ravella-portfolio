@@ -7,9 +7,9 @@
   if (!gl || !gl.getExtension('EXT_color_buffer_float')) { canvas.remove(); return; }
 
   const SIM = 128, DYE = 512;                 // simulation / smoke grid size
-  const CURL = 9, PRESSURE_ITERS = 18;         // swirl strength, solver quality
+  const CURL = 7, PRESSURE_ITERS = 18;         // swirl strength, solver quality
   const VEL_FADE = 0.9, DYE_FADE = 1.9;        // how fast motion and smoke settle
-  const FORCE = 4200, RADIUS = 0.00052;         // cursor push strength and size
+  const FORCE = 3600, RADIUS = 0.00026;         // cursor push strength and trail width (narrower = neater trail)
   const MAX_PUSH = 1600;                       // cap on very fast flicks (prevents grainy artifacts)
 
   // ---------- shaders ----------
@@ -122,7 +122,7 @@ void main(){
     const t = 0.5 + 0.5 * Math.sin(performance.now() / 1400);
     const mix = colors.drift * t;
     const col = colors.smoke.map((v, i) => (v * (1 - mix) + colors.smoke2[i] * mix) * k);
-    run('splat', dye.write, { uTarget: S(tex(0, dye.read)), aspect, point: [x, y], color: col, radius: RADIUS * 1.25 * (aspect > 1 ? aspect : 1) });
+    run('splat', dye.write, { uTarget: S(tex(0, dye.read)), aspect, point: [x, y], color: col, radius: RADIUS * 1.1 * (aspect > 1 ? aspect : 1) });
     dye.swap();
   };
 
